@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>홈스테이 호스트 리스트</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list2.css"  %}' rel="stylesheet" type="text/css">
+
+
+<script>
+$(function(){
+	$("#btnHome").click(function(){
+		location.href="/";
+	});
+	$("#btnAdd").click(function(){
+		location.href="product_write";
+	});
+});
+</script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAll">Homestay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">홈스테이 숙소등록</h1>
+		<button type="button" id="btnAdd" class="btn  btn-outline-warning" >숙소등록</button>
+	 {% for i in productList %}	
+		<form name="form1" method="post" action="/detail_infowrite?product_id={{i.product_id}}">
+			{% csrf_token %}	
+				<input type="hidden" name="product_id" value="{{i.product_id}}" >
+				<input type="submit" value="개인정보등록" class="btn  btn-outline-warning">
+		</form>		
+     </div>
+     {% endfor %}
+</section>
+
+	<main class="col-sm-9" style="width:100% ; margin:0 auto;">
+<article class="card card-product" >
+	<div class="card-body">
+	<div class="row">	
+	{% for row in productList %}
+		<aside class="col-sm-4" >
+			<div>			
+			{% if row.picture_url != "-" %}
+			{% load static %}
+			{% static "" as baseUrl %}
+			<img src="{{baseUrl}}images/{{row.picture_url}}" width="280px" height="260px">
+			{% endif %}
+			<span class="control hidden"><a href="product_edit?product_id={{row.product_id}}" class="fa fa-heart">[편집]</a></i></span>
+			</p>
+			</div>
+		</aside> 
+
+		<article class="col-sm-5">
+				<h4 class="title"> {{row.product_id}}
+				<a href="product_detail?product_id={{row.product_id}}">{{row.product_name}}</a>
+				</h4>
+				<p> {{row.username}}님의 홈스테이 소개:<br/>"{{row.description}}"
+				<hr>
+	<!-- 			<hr size="4"  width="350px" align="left" noshade> -->
+				<p> 
+				 주소: {{row.location}} {{row.locate}} <br/>
+				집유형: {{row.house}} <br/>
+				제공방의수: {{row.room}}개 <br/>
+				침대유형: {{row.bed}} <br/>
+				욕실유형: {{row.bathroom}} <br/>
+				애완동물: {{row.pet}} <br/>
+				가족수: {{row.family}}명<br/>
+				주유유형: {{row.gas}} (1:휘발유 2:경유 3:LPG)<br/>
+				언어교류 :{{row.language}}<br/>
+				문화교류: {{row.culture}}<br/>
+				  </p>
+
+		</article> 
+		
+		<aside class="col-sm-3 border-left">
+			<div class="action-wrap">
+				<div class="price-wrap h5">
+				▼ 아래 가격을 눌러 최종 가격을 선택해주세요!<br/>
+
+				</div>
+				<a href="/price_list?real_price={{real_price}}&product_id={{row.product_id}}&min_price={{min_price}}&max_price={{max_price}}" value="real_price"> 
+					<br/> <h4>제안가격: {{real_price}}원</h4>
+				</a> 		
+				</div>
+				<div value="min_price" > <h5> 최소가격: {{min_price}}원 </h5></div>
+				<div value="max_price"> <h5> 최대가격: {{max_price}}원 </h5></div>
+				<br>				
+				<hr>
+				<div class="price-wrap h5">
+					<p>▼ This is best price for friends!</p>
+				<div value="real_price"><h4 style="color:red;" >최종가격: {{row.real_price}}원</h4></div>
+				<br>
+				
+				
+			</div> 
+		</aside>
+	{% endfor %}	 
+	</div> 
+	</div> 
+</article> 	
+</main>
+<br><br><br><br><br><br>
+
+</body>
+</html>

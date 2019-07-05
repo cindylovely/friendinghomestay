@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list.css"  %}' rel="stylesheet" type="text/css">
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+$(function(){
+	$("#btnList").click(function(){
+		location.href="/room_listAll";
+	});
+	
+	$("#btnDelete").click(function(){
+		if(confirm("장바구니를 비우시겠습니까?")){
+			location.href="cart_del_all";
+		}
+	});		
+});
+</script>
+
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAll">Homestay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Event</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Likey</h1>
+<!--         <button type="button" id="btnHome" >Home</button>
+		<button type="button" id="btnAdd" >숙소등록</button>
+		{{count}}개의 숙소가 등록되었습니다. -->
+     </div>
+</section>
+
+{% if cartCount == 0 %}
+	장바구니가 비었습니다.
+{% endif %}
+
+{% if cartCount > 0 %}
+
+
+<!-- 
+<form id="form1" name="form1" method="post" action="cart_update">
+<table border="1" width="1000px;" align="center">
+	<tr>
+		<th>홈스테이 숙소명</th>
+		<th>가격</th>
+		<th>인원수</th>
+		<th>문화교류</th>
+		<th>문화교류비용</th>
+		<th>홈스테이 첫째날</th>
+		<th>홈스테이 마지막날</th>
+		<th>총 숙박일수</th>
+		<th>홈스테이 총 비용</th>
+	</tr>
+		{% for row in cartList %}
+	<tr>
+		<td>{{row.product_name}}</td>
+		<td>{{row.real_price}}</td>
+		<td>
+			수량
+			<input type="number" style="width:50px;"
+			min="0" max="100" name="amount" value="{{row.amount}}">
+			개별상품 코드값을 hidden으로 넘김
+			<input type="hidden" name="cart_id" value="{{row.cart_id}}">
+			<input type="hidden" name="product_id" value="{{row.product_id}}">
+		</td>
+		<td>{{row.travel}}</td>
+		<td>{{friending_price}}</td>
+		<td>{{row.checkin}}</td>
+		<td>{{row.checkout}}</td>
+	 	<td>{{dateinterval}}일</td>
+		<td>{{row.money}}</td>
+		<td>{{sum}}</td>
+		<td><a href="cart_del?cart_id={{row.cart_id}}">삭제 </a></td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td colspan="6" align="right">
+			Likey 금액 합계: {{sumMoney}}<br>
+			Likey 금액 합계: [홈스테이가격*(숙박일수)+문화교류비용]<br>
+			배송료 : {{fee}}<br>
+			총합계: {{sum}}<br>
+		</td>
+	</tr>
+</table>
+<button type="button" id="btnUpdate"> 수정 </button>
+</form>
+{% endif %}-->
+<!-- <br>
+<center>
+<button type="button" id="btnDelete">Likey 비우기 </button>
+<button type="button" id="btnList">숙소 리스트 </button>
+</center> -->
+
+
+
+ 
+
+<section class="section-content bg padding-y border-top">
+<div class="container">
+
+<div class="row">
+	<main class="col-sm-12">
+
+<div class="card">
+
+<form id="form1" name="form1" method="post" action="cart_update">
+<table class="table table-hover shopping-cart-wrap">
+<thead class="text-muted">
+<tr>
+  <th scope="col"  class="text-center">홈스테이 <br>숙소명</th>
+  <th scope="col"   class="text-center">인원수</th>
+  <th scope="col" class="text-center">가격</th>
+  <th scope="col"  class="text-center">문화교류</th>
+  <th scope="col"  class="text-center">문화교류 비용</th>
+  <th scope="col" class="text-center">홈스테이<br> 첫째날</th>
+  <th scope="col"  class="text-center">홈스테이 <br>마지막날</th>
+  <th scope="col"   class="text-center">숙박일수</th>
+  <th scope="col"  class="text-center">총 비용 </th>
+  <th scope="col">Action</th>
+</tr>
+</thead>
+
+
+<tbody>
+{% for row in cartList %}
+<tr>
+	<td>
+<figure class="media">
+	<figcaption class="media-body">
+		<h6 class="title text-truncate">{{row.product_name}}</h6>
+	</figcaption>
+</figure> 
+	</td>
+	<td>
+		<input type="number" style="width:50px;"
+		min="0" max="100" name="amount" value="{{row.amount}}">
+		<input type="hidden" name="cart_id" value="{{row.cart_id}}">
+		<input type="hidden" name="product_id" value="{{row.product_id}}">
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">{{row.real_price}}</var> 
+		</div>
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price" >{{row.travel}}</var> 
+		</div>
+	</td>	
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">{{friending_price}}	</var> 
+		</div>
+	</td>		
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">{{row.checkin}}	</var> 
+		</div>
+	</td>	
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">{{row.checkout}}	</var> 
+		</div>
+	</td>		
+	<td> 
+		<div class="price-wrap"> 
+			<var class="price">{{dateinterval}}일</var> 
+		</div>
+	</td>	
+	<td> 
+		<div class="price-wrap"> 
+			<var width="250">[(홈스테이가격 *숙박일수*인원수)+문화교류비용 ]=<h4 style="color:red;"  >{{sum}}</h4></var>
+		</div>
+	</td>	
+	<td class="text-right"> 
+	<a href="cart_del?cart_id={{row.cart_id}}" class="btn btn-outline-danger">× Remove </a>
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</form>
+</div> 
+<br>
+<center>
+<button type="button" id="btnDelete" class="btn  btn-outline-warning">Likey 비우기 </button>
+<button type="button" id="btnList" class="btn  btn-outline-warning">숙소 리스트 </button>
+</center>
+
+	</main> 
+</div>
+
+</div>
+</section>
+
+</body>
+</html>

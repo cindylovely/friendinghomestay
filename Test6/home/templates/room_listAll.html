@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+<title>Booking</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="The River template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href='{% static "styles/bootstrap-4.1.2/bootstrap.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/font-awesome-4.7.0/css/font-awesome.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.theme.default.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/animate.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/jquery-datepicker/jquery-ui.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/booking.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/booking_responsive.css"  %}' rel="stylesheet"type="text/css">
+
+<script>
+$(function(){
+	$("#btnHome").click(function(){
+		location.href="/";
+	});
+	$("#btnAdd").click(function(){
+		location.href="product_write";
+	});		
+});
+</script>
+
+<!-- <script>
+function post_list(){
+
+	document.form1.action = "post_list";
+	document.form1.submit();
+}
+</script> -->
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="header_content d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a href="#">Homestay</a></div>
+			<div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+				<nav class="main_nav">
+					<ul class="d-flex flex-row align-items-start justify-content-start">
+						<li><a href="http://127.0.0.1:8000/">Home</a></li>
+						<li><a href="/about">Site Information</a></li>
+						<li><a href="/room_listAll">Homestay</a></li>
+						<li><a href="/blog">Event</a></li>
+						<li><a href="/list">Communication</a></li>
+					</ul>
+				</nav>
+
+				{% if data.is_authenticated %}
+<!-- 				  <a href="/mypage"> 마이페이지</a>
+				  <a href="/logout"> 로그아웃</a> -->
+				{% else %}
+<!-- 					아이디:{{data.username}}<br>
+					로그인여부:{{data.is_authenticated}}<br> -->
+				 	<span style="color:red;">{{msg}}</span><br>
+				 	<a href="/mypage"> 마이페이지</a>
+				  	<a href="/logout"> 로그아웃</a>
+					<a href="/product_list">숙소등록</a> 
+				{% endif %}
+				<!-- Hamburger Menu -->
+				<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
+		<div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="menu_content">
+			<nav class="menu_nav text-right">
+				<ul>
+					<li><a href="http://127.0.0.1:8000/">Home</a></li>
+					<li><a href="/about">About us</a></li>
+					<li><a href="/room_listAll">Homestay</a></li>
+					<li><a href="/blog">Event</a></li>
+					<li><a href="/list">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+		</div>
+	</div>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="background_image" style="background-image:url({% static "images/booking.png" %})"></div>
+		<div class="home_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content text-center">
+							<div class="home_title"> Book a Homestay</div>
+							<br> <br>
+
+<!-- 여기서부터 정렬하기 -->
+
+<form action="" method="get" >	
+						<table cellpadding="0" cellspacing="0" summary="" class="table table-striped"  >
+							<tbody>
+								<tr>
+									<th scope="row">주소</th>
+										<td colspan="2">
+											<select name="location" class=selectBasic value="{{location}}">
+											<option value="">전체</option>
+											<option value="서울특별시"  >서울특별시</option>
+											<option value="경기도" >경기도</option>
+											</select>
+										</td>
+	
+									<th scope="row">가능언어</th>
+									<td colspan="2">
+									<select name="drop1" class=selectBasic value="{{drop1}}">
+									<option value="" >전체</option>
+									<option value="한국어"  >한국어</option>
+									<option value="영어" >영어</option>
+									<option value="일본어" >일본어</option>
+									<option value="프랑스어" >프랑스어</option>
+									<option value="스페인어" >스페인어</option>
+									<option value="중국어" >중국어</option>
+									<option value="독일어" >독일어</option>
+									<option value="러시아어" >러시아어</option>
+									<option value="이탈리아어" >이탈리아어</option>
+									<option value="아랍어" >아랍어</option>
+									<option value="포르투갈어" >포르투갈어</option>
+									<option value="말레이-인도네시아어" >말레이-인도네시아어</option>
+									<option value="힌디어" >힌디어</option>
+									<option value="기타" >기타</option>
+									</select>
+									</td>
+								</tr>
+								<tr>	
+									<th scope="row">문화교류</th>
+									<td colspan="2">
+										<select name="culture" class=selectBasic value="{{culture}}">
+										<option value="">전체</option>
+										<option value="yes"  >yes</option>
+										<option value="no" >no</option>
+										</select>
+									</td>
+									<th scope="row">언어교류</th>
+									<td colspan="2">
+										<select name="language" class=selectBasic value="{{language}}">
+										<option value="">전체</option>
+										<option value="yes"  >yes</option>
+										<option value="no" >no</option>
+										</select>
+									</td>					
+								</tr>
+								<tr>
+									<th scope="row">방개수</th>
+										<td>
+											<select name="room" class=selectBasic value="{{room}}">
+												<option value="">전체</option>
+												<option value='1'  >1개</option>
+												<option value='2'  >2개</option>
+												<option value='3'  >3개</option>
+												<option value='4'  >4개</option>
+												<option value='5'  >5개</option>
+											</select>
+										</td>
+									<th scope="row">방침대</th>
+									<td ><select name="bed" class=selectBasic value="{{bed}}">
+									<option value="">전체</option>
+									<option value='싱글침대'  >싱글침대</option><option value='트윈침대'  >트윈침대</option><option value='더블침대'  >더블침대</option><option value='온돌'  >온돌</option><option value='기타'  >기타</option>
+									</select></td>
+									<th scope="row">욕실</th>
+									<td colspan="2"><select name="bathroom" class="selectBasic"  value="{{bathroom}}">
+											<option value="">전체</option>
+											<option value='공용'  >공용</option><option value='개별'  >개별</option><option value='기타'  >기타
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">가족수</th>
+									<td><select name="family" class="selectBasic" value="{family}}">
+										<option value="">전체</option>
+										<option value='1'  >1명</option><option value='2'  >2명</option><option value='3'  >3명</option><option value='4'  >4명</option><option value='5'  >5명</option>
+										</select></td>
+									<th scope="row">종교</th>
+									<td><select name="religion" class=selectBasic value="{religion}}">
+									<option value="">전체</option>
+									<option value='기독교'  >기독교</option><option value='카톨릭'  >카톨릭</option><option value='정교회'  >정교회</option><option value='유대교'  >유대교</option><option value='불교'  >불교</option><option value='이슬람교'  >이슬람교</option><option value='힌두교'  >힌두교</option><option value='무교'  >무교</option>
+									</select></td>
+									<th scope="row">애완동물</th>
+									<td><select name="pet" class=selectBasicvalue value="{{pet}}">
+									<option value="">전체</option>
+									<option value='강아지'>강아지</option>
+									<option value='고양이'>고양이</option>
+									<option value='조류'>조류</option>
+									<option value='어류'>어류</option>
+									<option value='없음'>없음</option>
+									</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						
+					<input type="submit" value="검색">
+</form>						  
+					</div>	
+					</div>	
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<br> <br>
+
+	
+<section class="section-content bg padding-y">
+<div class="container">
+<div class="row">
+	<aside class="col-sm-3">
+<div class="card card-filter">
+	<article class="card-group-item">
+		<header class="card-header">
+			<a class="" aria-expanded="true" href="#" data-toggle="collapse" data-target="#collapse22">
+				<i class="icon-action fa fa-chevron-down"></i>
+				<h6 class="title">By Category</h6>
+			</a>
+		</header>
+		<div style="" class="filter-content collapse show" id="collapse22">
+			<div class="card-body">
+				<form method="post" class="pb-3">
+				<div class="input-group">
+				  <input class="form-control" placeholder="Search" type="text" name="search" value="{{search}}">
+				  <div class="input-group-append">
+				    <input class="btn btn-primary" type="submit" value="검색">
+				  </div>
+				</div>
+				
+				<ul class="list-unstyled list-lg" >
+					<select name="search_option">
+						{% if search_option == "username" %}
+						<option value="username" selected> 숙박 </option>
+						<option value="language"> 숙박+언어 </option>
+						<option value="culture"> 숙박+문화 </option>
+						<option value="all"> 숙박+문화+언어 </option>
+						<!-- <li><a href="#">1.숙박 </a></li> -->
+						{% elif search_option == "language" %}
+						<option value="username"> 숙박 </option>
+						<option value="language" selected> 숙박+언어 </option>
+						<option value="culture"> 숙박+문화 </option>
+						<option value="all"> 숙박+문화+언어 </option>						
+						<!-- <li><a href="#">2.숙박+언어</a></li> -->
+						{% elif search_option == "culture" %}
+						<option value="username"> 숙박 </option>
+						<option value="language"> 숙박+언어 </option>
+						<option value="culture" selected> 숙박+문화 </option>
+						<option value="all"> 숙박+문화+언어 </option>						
+						<!-- <li><a href="search">3.숙박+문화 </a></li> -->
+						{% else %}
+						<option value="username"> 숙박 </option>
+						<option value="language"> 숙박+언어 </option>
+						<option value="culture"> 숙박+문화 </option>
+						<option value="all" selected> 숙박+문화+언어 </option>						
+						<!-- <li><a href="#">4.숙박+문화 +언어</a></li> -->
+						{% endif %}
+						</select>
+				</ul> 
+			</div> 
+			</form>
+		</div> 
+	</article> 
+	
+	<article class="card-group-item">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse33">
+				<i class="icon-action fa fa-chevron-down"></i>
+				<h6 class="title">friending Price </h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse33">
+			<div class="card-body">
+				<input type="range" class="custom-range" min="0" max="100" name="">
+				<div class="form-row">
+				<div class="form-group col-md-6">
+				  <label>Min</label>
+				  <input class="form-control" placeholder="$0" type="number">
+				</div>
+				<div class="form-group text-right col-md-6">
+				  <label>Max</label>
+				  <input class="form-control" placeholder="$1,0000" type="number">
+				</div>
+				</div> <!-- form-row.// -->
+				<button class="btn btn-block btn-outline-primary">Apply</button>
+			</div> <!-- card-body.// -->
+		</div> <!-- collapse .// -->
+	</article> <!-- card-group-item.// -->
+	<article class="card-group-item">
+		<header class="card-header">
+			<a href="#" data-toggle="collapse" data-target="#collapse44">
+				<i class="icon-action fa fa-chevron-down"></i>
+				<h6 class="title">By Feature </h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse44">
+			<div class="card-body">
+			<form>
+				<label class="form-check">
+				  <input class="form-check-input" value="" type="checkbox">
+				  <span class="form-check-label">
+				  	<span class="float-right badge badge-light round">5</span>
+				    Samsung
+				  </span>
+				</label> 
+			</form>
+			</div>
+		</div> 
+	</article> 
+</div> 
+	</aside> 
+
+	
+	<main class="col-sm-9">
+<article class="card card-product">
+<!-- {{count}}개의 홈스테이가 등록되어있습니다 -->
+	<div class="card-body">
+	<div class="row">
+	<span class="real_price" >{{real_price}}</span>		
+	{% for row in productList %}
+		<aside class="col-sm-3" >
+			<div>			
+			{% if row.picture_url != "-" %}
+			{% load static %}
+			{% static "" as baseUrl %}
+			<img src="{{baseUrl}}images/{{row.picture_url}}" width="230px" height="230px">
+			{% endif %}
+			</div>
+		</aside> 
+
+		<article class="col-sm-6">
+				<h4 class="title"> {{row.product_id}}{{row.product_name}}  </h4>
+				{{row.username}}님의 홈스테이 소개: "{{row.description}}"
+				<hr size="2"  width="320px" noshade>
+				<dl class="dlist-align">
+				  <dt>주소: {{row.location}} {{row.locate}}</dt>
+					<dt>집유형: {{row.house}} </dt>
+					<dt>침대유형: {{row.bed}}</dt>
+					<dt>욕실유형: {{row.bathroom}}</dt>
+					<dt>가족수: {{row.family}} 명</dt>
+					<dt>애완동물: {{row.pet}} </dt>
+					<dt>주유유형: {{row.gas}}</dt>
+					<dt>언어교류 :{{row.language}} 문화교류: {{row.culture}}</dt>
+					<br/>
+				</dl> 		  				 
+		</article> 
+		
+		<aside class="col-sm-3 border-left">
+			<div class="action-wrap">
+				<div class="price-wrap h4">
+					<span class="price"> {{row.real_price}}</span>		
+				</div>
+				<br>
+				<p>
+				<!-- 	<a href="cart_list" class="btn btn-primary"> Buy now </a><br> -->
+					<a href="product_detail?product_id={{row.product_id}}&gas={{row.gas}}" class="btn btn-primary"> Details  </a><br>
+				</p>
+				<a href="product_detail?product_id={{row.product_id}}"><i class="fa fa-heart"></i> {{row.product_name}}</a>	
+			</div> 
+		</aside>
+	{% endfor %}	 
+	</div> 
+	</div> 
+</article> 		
+
+<br/><br/><br/><br/><br/>
+
+<!-- 				
+					<div class="container mb-4">
+
+					    <div class="row">
+					        <div class="col-12">
+					            <div class="table-responsive">
+					                <table class="table table-striped"  border="1" width="500px">
+					                    <thead>
+					                        <tr>
+					                        	<th scope="col" class="text-center"> </th>
+					                            <th scope="col" class="text-center">숙소사진 </th>
+					                            <th scope="col" class="text-center">호스트 아이디</th>
+					                            <th scope="col" class="text-center">숙박명</th>
+					                            <th scope="col" class="text-center">프렌딩 숙박가격</th>
+					                            <th scope="col" class="text-center">숙소 소개</th>
+					                            <th scope="col" class="text-center">언어교류</th>
+					                            <th scope="col" class="text-center">문화교류</th>
+					                            <th scope="col" class="text-center">Likey</th>
+					                        </tr>
+					                    </thead>
+					                    
+									{% for row in productList %}
+									 	<tr align="center">
+											<td>{{row.product_id}}</td>
+											<td>
+											{% if row.picture_url != "-" %}
+											{% load static %}
+											{% static "" as baseUrl %}
+											<img src="{{baseUrl}}images/{{row.picture_url}}" width="250px" height="250px">
+											{% endif %}
+											</td>
+											<td>{{row.username}}</td>
+											<td>{{row.product_name}}</td>
+											<td>{{row.price}}</td>
+											<td>{{row.description}}</td>
+											<td>{{row.language}}</td>
+											<td>{{row.culture}}</td>											
+											<td><a href="product_detail?product_id={{row.product_id}}">{{row.product_name}}</a>찜하기</td>
+					
+										</tr>
+									{% endfor %}	
+									</table>                   
+					            </div>
+					        </div>
+					    </div>
+					</div>	 -->						
+</div>
+</div>
+</section>
+
+<script src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script src='{% static "styles/bootstrap-4.1.2/popper.js" %}'></script>
+<script src='{% static "styles/bootstrap-4.1.2/bootstrap.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TweenMax.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TimelineMax.min.js" %}'></script>
+<script src='{% static "plugins/scrollmagic/ScrollMagic.min.js" %}'></script>
+<script src='{% static "plugins/greensock/animation.gsap.min.js" %}'></script>
+<script src='{% static "plugins/greensock/ScrollToPlugin.min.js" %}'></script>
+<script src='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.js" %}'></script>
+<script src='{% static "plugins/easing/easing.js" %}'></script>
+<script src='{% static "plugins/progressbar/progressbar.min.js" %}'></script>
+<script src='{% static "plugins/parallax-js-master/parallax.min.js" %}'></script>
+<script src='{% static "plugins/jquery-datepicker/jquery-ui.js" %}'></script>
+<script src='{% static "js/booking.js" %}'></script>
+
+
+
+</body>
+</html>

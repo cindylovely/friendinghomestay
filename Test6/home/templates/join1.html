@@ -1,0 +1,84 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+   ul{
+   list-style:none;
+   }
+   div{
+   width: 700px;
+   }
+   .aa {
+    color :#884499;
+   }
+</style>
+ </head>
+ <body>
+ <div>
+ <form action="#" method="post"  >
+ {% csrf_token %}   
+	<!--  <input type="image" src="images/title.gif"> --><img src='{% static "images/title.gif"   %}' alt=""><br>
+		<img src='{% static "images/join.gif"   %}' alt="">
+		<span><span style="color:red ">*</span>필수 입력사항</span>
+     
+ 	 <fieldset>
+	 
+		 <ul>
+		  <li class="aa">
+			  <label><span style="color:red ">*</span>아이디 <input type="text"  size="20" />
+			  <img src='{% static "images/1.gif"   %}' alt="">
+			  </label><hr> 
+		  </li>	 
+		  <li>
+			 <label><span style="color:red ">*</span>비밀번호 <input type="text"  size='20' /><label>
+			 </label><hr> 
+		  </li>
+		  <li>
+			 <label><span style="color:red ">*</span>이름 <input type="text"  size='20' />
+			 </label><hr> 
+		  </li>
+		  <li>
+			 <label><span style="color:red ">*</span>닉네임 <input type="text"  size='20' />
+			 <img src='{% static "images/2.gif"   %}' alt="">
+			 </label><hr> 
+		  </li>
+		  <li>
+			 <label><span style="color:red ">*</span> 성별 <input type="radio" name="selcet"  value="1"/> 남자 <input type="radio" name="selcet" value="1"/>여자
+			 </label><hr> 
+		  </li>
+	      <li>
+			 <label><span style="color:red ">*</span>이메일 <input type="text"  size='20' />
+			 <img src='{% static "images/3.gif"   %}' alt=""><input type="checkbox"  value="1">
+			 <span style="color:#056297">정보메일 수신</span>
+			 </label><hr> 
+		  </li>
+		 
+		     <table >
+				  <tr ><td rowspan="2"><label><span style="color:red ">*</span>주소</label></td><td><input type="text"  size='5' /> - <input type="text"  size='5' />
+			                   <img src='{% static "images/4.gif"   %}' alt="">
+			                   <br>
+                               <input type="text"  size='20' /> <input type="text"  size='20' /></td></tr>
+				  <tr><td></td></tr>
+
+			  </table><hr>
+			  <li>
+			   <label><span style="color:red ">*</span>핸드폰 <input type="text" size="3">-<input type="text" size="3">-<input type="text" size="3"> <input type="checkbox" value="1"/><span style="color:#056297">문자서비스수신</span>   </label>
+			  </li><hr>
+			   <li>
+			   <label><span style="color:red ">*</span>전화번호 <input type="text" size="3">-<input type="text" size="3">-<input type="text" size="3">  </label>
+			  </li>
+ 			   
+			 </label><hr> 
+		  </li>
+		  </ul>
+	</form>	
+	<p> <center>
+	   <label> <input type="submit" value="회원가입" /></label>
+	   <label> <input type="reset" value="취소.이전" /></label>
+	   </center> </p>
+  <div>
+ </body>
+</html>

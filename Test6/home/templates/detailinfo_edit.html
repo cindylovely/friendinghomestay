@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list.css"  %}' rel="stylesheet" type="text/css">
+<script>
+function detailinfo_delete(){
+	if(confirm("삭제하시겠습니까?")){
+		document.form1.action = "detailinfo_delete";
+		document.form1.submit();
+	}
+}
+function detailinfo_update(){
+	document.form1.action = "detailinfo_update";
+	document.form1.submit();
+}
+</script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay-registration </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAll">homestay</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/blog">Event <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading"> (언어/문화)교류 <br/>수정/삭제</h1>
+     </div>
+</section>
+<form id="form1" name="form1" method="post" enctyoe="multipart/form-data">
+<table>
+	<tr>
+		<td>번호</td>
+		<td><input name="id" value="{{dto.id}}"></td>
+	</tr>
+	<tr>
+		<td>회원유형</td>
+		<td><input name="id" value="{{dto.client}}"></td>
+	</tr>	
+	<tr>
+		<td>성별</td>
+		<td><input name="sex" value="{{dto.sex}}"></td>
+	</tr>
+	<tr>
+		<td>연령</td>
+		<td><input name="age" value="{{dto.age}}"></td>
+	</tr>	
+	<tr>
+		<td>직업</td>
+		<td><input name="job" value="{{dto.job}}"></td>
+	</tr>
+	<tr>
+		<td>종교</td>
+		<td><input name="religion" value="{{dto.religion}}"></td>
+	</tr>
+	<tr>
+		<td>취미</td>
+		<td><input name="hobby" value="{{dto.hobby}}"></td>
+	</tr>				
+	<tr>
+		<td>숙박위치</td>
+		<td><input name="location" value="{{dto.location}}"></td>
+	</tr>
+	<tr>
+		<td>1순위 언어</td>
+		<td><input name="drop1" value="{{dto.drop1}}"></td>
+	</tr>
+		<tr>
+		<td>2순위 언어</td>
+		<td><input name="drop2" value="{{dto.drop2}}"></td>
+	</tr>
+		<tr>
+		<td>3순위 언어</td>
+		<td><input name="drop3" value="{{dto.drop3}}"></td>
+	</tr>
+	</tr>
+		<tr>
+		<td>주 당 언어교류 횟수</td>
+		<td><input name="languageexchangecount" value="{{dto.languageexchangecount}}"></td>
+	</tr>
+	</tr>
+		<tr>
+		<td>회 당 언어교류는 시간</td>
+		<td><input name="languageexchangeminute" value="{{dto.languageexchangeminute}}"></td>
+	</tr>
+	</tr>
+	<tr>
+		<td>언어교류</td>
+		<td><input name="language" value="{{dto.language}}"></td>
+	</tr>	
+	<tr>
+		<td>문화교류</td>
+		<td><input name="culture" value="{{dto.culture}}"></td>
+	</tr>
+	<tr>
+		<td>선호하는 관광지</td>
+		<td><input name="culture" value="{{dto.travel}}"></td>
+	</tr>
+	<tr>
+		<td>차량의 주유정보</</td>
+		<td><input name="culture" value="{{dto.gas1}}"></td>
+	</tr>			
+	<tr>
+		<td>첨부파일</td>
+		<td>
+			{% load static %}
+		{% static "" as baseUrl %}
+		<img src="{{baseUrl}}images/{{dto.file2}}" width="300px" height="300px"><br>
+		<input type="file" name="file2">
+		</td>
+	</tr>
+	<tr>	
+		<td colspan="2" align="center">
+			<input type="hidden" name="id" value="{{dto.id}}">
+			
+			<input type="button" value="수정" onclick="detailinfo_update()">
+			
+			<input type="button" value="삭제" onclick="detailinfo_delete()">
+			
+			<!-- <input type="button" value="목록" onclick="location.href='detailinfo_list' "> -->
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

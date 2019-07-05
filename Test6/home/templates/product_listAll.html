@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list.css"  %}' rel="stylesheet" type="text/css">
+<script>
+$(function(){
+	$("#btnHome").click(function(){
+		location.href="/";
+	});
+	$("#btnAdd").click(function(){
+		location.href="product_write";
+	});		
+});
+</script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay-registration </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/booking">Homestay</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/blog">Event <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href="/product_list">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="badge badge-light">3</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">홈스테이 등록</h1>
+        <button type="button" id="btnHome" >Home</button>
+		<button type="button" id="btnAdd" >숙소등록</button>
+		{{count}}개의 숙소가 등록되었습니다.
+     </div>
+</section>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped"  border="1" width="500px">
+                    <thead>
+                        <tr>
+                        	<th scope="col"> </th>
+                            <th scope="col">Homestay photo </th>
+                            <th scope="col">Homestay Name</th>
+                            <th scope="col">Host Name</th>
+<!--                             <th scope="col">Available</th> -->
+                            <th scope="col" class="text-center">Friending Price</th>
+                            <th scope="col" class="text-center">Homestay Info</th>
+                            <th scope="col">Edit</th>
+                        </tr>
+                    </thead>
+                    
+				{% for row in productList %}
+				 	<tr align="center">
+						<td>{{row.product_id}}</td>
+						<td>
+						{% if row.picture_url != "-" %}
+						{% load static %}
+						{% static "" as baseUrl %}
+						<img src="{{baseUrl}}images/{{row.picture_url}}" width="250px" height="250px">
+						{% endif %}
+						</td>
+						<td>{{row.username}}</td>
+						<td><a href="product_detail?product_id={{row.product_id}}">{{row.product_name}}</a></td>
+						<td>{{row.price}}</td>
+						<td>{{row.description}}</td>
+						<td>
+						<span class="control hidden"><a href="product_edit?product_id={{row.product_id}}">[편집]</a></span>
+						</td>
+
+					</tr>
+				{% endfor %}	
+				</table>                   
+            </div>
+        </div>
+       <!--  <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <button class="btn btn-block btn-light">Continue Shopping</button>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <button class="btn btn-lg btn-block btn-success text-uppercase">Checkout</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+</body>
+</html>

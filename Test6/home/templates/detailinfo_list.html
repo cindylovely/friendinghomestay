@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>세부정보리스트</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list2.css"  %}' rel="stylesheet" type="text/css">
+
+<script>
+$(function(){
+	$("#btnHome").click(function(){
+		location.href="/";
+	});
+	$("#btnAdd").click(function(){
+		location.href="detail_infowrite";
+	});		
+});
+</script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAll">Homestay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">개인 (언어/문화교류) 상세정보</h1>
+      <!--    <button type="button" id="btnHome" >Home</button> -->
+<!-- 		<button type="button" id="btnAdd" ></button> -->
+     </div>
+</section>
+
+    
+<!-- <main class="col-sm-12" style="width:80% ; margin:0 auto;">
+<article class="card card-product" >
+	<div class="card-body">
+	<div class="row">	
+	{% for list in detailinfoList %}
+		<aside class="col-sm-4" >
+		<br><br><br><br><br>
+			<div>			
+			{% if list.picture_url != "-" %}
+			{% load static %}
+			{% static "" as baseUrl %}
+			<img src="{{baseUrl}}images/{{list.file2}}" width="250px" height="250px">
+			{% endif %}
+			</div>
+			<p align="center" >회원유형 :{{list.client}}</p>
+		</aside> 
+
+		<article class="col-sm-5" align="center">
+		<br>
+				<h4 class="title">  {{list.username}} </h4>
+				<p> 
+			 		 번호 : {{list.id}}<br/>
+			 		 성별 : {{list.sex}}<br/>
+			 		 출생년도 :{{list.age}}<br/>
+			 		 직업 :{{list.job}}<br/>
+			 		 종교 :{{list.religion}}<br/>
+			 		 취미 :{{list.hobby}}<br/>
+					 숙박위치 :{{list.location}}<br/>
+					<hr>
+					 <strong>1순위 언어 :{{list.drop1}}</strong><br/>
+					 <strong>2순위 언어 :{{list.drop2}}</strong><br/>
+					 <strong>3순위 언어 :{{list.drop3}}</strong> <br/>
+					 주 당 언어교류 횟수 :{{list.languageexchangecount}}<br/>
+					 회 당 언어교류는 시간 :{{list.languageexchangeminute}}<br/>
+					 언어교류 :{{list.language}}<br/>
+		 			 문화교류 :{{list.culture}}<br/>
+		 			 선호하는 관광지 :{{list.travel}}<br/>
+		 			차량의 주유정보 :{{list.gas1}}<br/>
+				</p>
+		</article> 
+		
+		<aside class="col-sm-3 border-left">
+			<div class="action-wrap">
+				<br>
+				<span class="control hidden"><a href="detailinfo_edit?id={{list.id}}"  class="fa fa-heart"> 수정</a></span>
+				<br>
+				<span class="control hidden"><a href="detailinfo_matching"  class="fa fa-heart"> 추천 호스트</a></span>
+				<span class="control hidden"><a href="detailinfo_matching?id={{list.id}}"  class="fa fa-heart">[추천 호스트]</a></span>
+				
+			</div> 
+			
+		</aside>
+	{% endfor %}	 
+	</div> 
+	</div> 
+</article> 
+<br>	<br>	<br>	<br>	
+</main>     -->
+  
+  
+  
+
+<main class="card" style="width:80% ; margin:0 auto;">
+	<div class="row no-gutters">
+	
+{% for list in detailinfoList %} 		
+<article class="gallery-wrap"> 
+<div class="img-big-wrap">
+ 	 <div>			 	
+ 	 <br> <br>
+ 	 &nbsp;&nbsp;
+ 		<tr align="center">
+			<td>
+				{% if list.picture_url != "-" %}
+				{% load static %}
+				{% static "" as baseUrl %}
+				<img src="{{baseUrl}}images/{{list.file2}}" width="250px" height="250px">
+				{% endif %}
+			</td>	
+		</tr>
+	</div>
+</div> 
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span class="control hidden"><a href="detailinfo_edit?id={{list.id}}"  class="fa fa-heart" >수정</a></span>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<span><a href="detailinfo_matching"  class="fa fa-heart"  style="color:red;">추천 호스트 </a></span>	
+</article>
+		<aside class="col-sm-6">
+		
+<article class="card-body">
+<!-- short-info-wrap -->
+	<h3 class="title mb-3">	
+			<tr>	
+				<td>  </td>
+			</tr>
+		</h3>
+<div class="mb-3"> 
+	<var class="price h3 text-warning"> 
+		<span class="currency">
+			<tr>	
+				<td> {{list.username}}</td>
+			</tr>
+		</span>
+	</var> 
+</div>
+		
+		
+
+<dl class="row">
+  <dt class="col-sm-7">번호 </dt>
+  <dd class="col-sm-5">{{list.id}}</dd>
+  
+  <dt class="col-sm-7">회원유형 </dt>
+  <dd class="col-sm-5">{{list.client}}</dd>
+    
+  <dt class="col-sm-7">호스트 성별</dt>
+  <dd class="col-sm-5">{{list.sex}}</dd>
+  
+  <dt class="col-sm-7">출생년도</dt>
+  <dd class="col-sm-5">{{list.age}}</dd>  
+ 
+  <dt class="col-sm-7">직업</dt>
+  <dd class="col-sm-5">{{list.job}}</dd>   
+
+  <dt class="col-sm-7">종교</dt>
+  <dd class="col-sm-5">{{list.religion}}</dd>  
+   
+  <dt class="col-sm-7">취미</dt>
+  <dd class="col-sm-5">{{list.hobby}}</dd>   
+  
+  <dt class="col-sm-7">숙박위치</dt>
+  <dd class="col-sm-5">{{list.location}}</dd>     
+  
+
+  <dt class="col-sm-7">언어교류 1순위</dt>
+  <dd class="col-sm-5">{{list.drop1}}</dd>
+  
+  <dt class="col-sm-7">언어교류 2순위</dt>
+  <dd class="col-sm-5">{{list.drop2}}</dd>
+  
+    <dt class="col-sm-7">언어교류 3순위</dt>
+  <dd class="col-sm-5">{{list.drop3}}</dd>  
+  
+  <dt class="col-sm-7">주당 선호하는 언어교류 횟수</dt>
+  <dd class="col-sm-5">{{list.languageexchangecount}}</dd>  
+
+  <dt class="col-sm-7">언어교류</dt>
+  <dd class="col-sm-5">{{list.language}}</dd>
+
+  <dt class="col-sm-7"> 문화교류</dt>
+  <dd class="col-sm-5">{{list.culture}}</dd>
+  
+   <dt class="col-sm-7"> 선호하는 관광지</dt>
+  <dd class="col-sm-5">{{list.travel}}</dd>    
+</dl>
+
+</article> 
+		</aside>
+{% endfor %}			
+	</div>	
+</main>  
+  
+<br>	<br>	<br>	<br>
+
+</div>
+</body>
+</html>

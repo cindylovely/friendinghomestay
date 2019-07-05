@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>홈스테이 호스트 숙소등록</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list4.css"  %}' rel="stylesheet" type="text/css">
+
+
+<script>
+function product_write(){
+	document.form1.action = "product_insert";
+	document.form1.submit();
+}
+</script>
+</head>
+<body>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAL\ll">Room</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Event <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">홈스테이 숙소등록</h1>
+     </div>
+</section>
+
+<div class="container">
+	<div class="col-lg-12 well">
+	<div class="row">
+				<!-- 첨부파일 보낼때 -->
+				<form id="form1" name="form1" method="post" enctype="multipart/form-data">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label><h5>① <input type="text" name="username" value={{uid}} size="5">님의 홈스테이명</h5></label>
+								<input type="text" name="product_name" class="form-control" placeholder="홈스테이명" >
+								<br>
+							</div>
+						</div>
+						<hr size="4"  width="1000px" align="left" noshade>			
+					 	<div class="row">
+							<div class="col-sm-6 form-group">										
+							<label><h5>② 홈스테이 주소</h5></label>
+							<br>
+							<input type="radio" name="location" value="서울특별시" >서울특별시
+							<input type="radio" name="location" value="경기도" checked>경기도
+							<input type="text" name="locate" class="form-control" placeholder="홈스테이 주소">
+							<br>
+							</div>	
+						</div>	
+						<hr size="4"  width="1000px" align="left" noshade>		
+					 	<div class="row">
+							<div class="col-sm-6">										
+							<label><h5>③ 숙소설명</h5></label>
+							<br>
+							<textarea  placeholder="호스트님의 홈스테이 소개" rows="3" cols="150" class="form-control" name="description" id="description"></textarea>
+							<br>
+							</div>								
+						</div>
+						<hr size="4"  width="1000px" align="left" noshade>		
+						<div class="row">
+							<div class="col-sm-6">
+								<label><h5>④ 숙박가능일수</h5></label>
+
+								<input type="text" name="minday"  placeholder="최소숙박가능일수"  class="form-control">
+								<br>
+								<input  type="text" name="maxday"  placeholder="최대숙박가능일수"  class="form-control">
+								<br>
+					   	 	</div>
+					   	</div>	
+						<hr size="4"  width="1000px" align="left" noshade>		
+					   	<div class="row">
+							<div class="col-sm-6">
+								<label><h5>⑤ 게스트 방 침대</h5></label>
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<select name="bed" class=selectBasic>
+										<option value='싱글침대'>싱글침대</option>
+										<option value='트윈침대'>트윈침대</option>
+										<option value='더블침대'>더블침대</option>
+										<option value='온돌'>온돌</option>
+										<option value='기타'>기타</option>
+									</select>	
+							</div>
+						</div>
+						<br>	
+						<hr size="4"  width="1000px" align="left" noshade>		
+						<div class="row">	
+							<div class="col-sm-6">
+								<label><h5>⑥ 게스트 욕실사용</h5></label>
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<select name="bathroom" class=selectBasic>
+										<option value='공용'>공용</option>
+										<option value='개별'>개별</option>
+										<option value='기타'>기타</option>
+									</select>	
+							</div>	
+						</div>
+						<br>
+						<hr size="4"  width="1000px" align="left" noshade>		
+						<div class="row">
+							<div class="col-sm-6">
+								<label><h5>⑦ 가족수</h5></label>
+									<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<select name="family" class=selectBasic>
+										<option value='1'>1</option>
+										<option value='2'>2</option>
+										<option value='3'>3</option>
+										<option value='4'>4</option>
+										<option value='5'>5명이상</option>
+									</select>		
+							</div>		
+						</div>	
+						<br>
+						<hr size="4"  width="1000px" align="left" noshade>						
+						<div class="row">
+							<div class="col-sm-6">
+								<label><h5>⑧ 홈스테이 집 형태</h5></label>
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<select name="house" class=selectBasic>
+									<option value='아파트'>아파트</option>
+									<option value='연립빌라'>연립/빌라</option>
+									<option value='단독주택'>단독주택</option>
+									<option value='원룸오피스텔'>원룸/오피스텔</option>
+									<option value='한옥'>한옥</option>
+									<option value='별장'>별장</option>
+								</select>	
+							</div>
+						</div>
+						<br>
+						<hr size="4"  width="1000px" align="left" noshade>		
+						<div class="row">		
+							<div class="col-sm-6">
+								<label><h5>⑨ 게스트 방 개수</h5></label>
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<select name="room" class=selectBasic>
+										<option value='1'>1</option>
+										<option value='2'>2</option>
+										<option value='3'>3</option>
+										<option value='4'>4</option>
+										<option value='5'>5</option>
+									</select>	
+							</div>	
+						</div>		
+						<br>
+						<hr size="4"  width="1000px" align="left" noshade>			
+						<div class="row">									
+							<div class="col-sm-6">
+								<label><h5>⑩ 애완동물</h5></label>
+								<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<select name="pet" class=selectBasic>
+									<option value='없음'>없음</option>
+									<option value='강아지'>강아지</option>
+									<option value='고양이'>고양이</option>
+									<option value='조류'>조류</option>
+									<option value='어류'>어류</option>
+									
+								</select>	
+							</div>	
+						</div>
+						<br>
+						<hr size="4"  width="1000px" align="left" noshade>		
+					<div class="row">
+						<div class="col-sm-6">
+							<label><h5>⑪ 언어교류</h5></label>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="language" value="yes">yes
+								<input type="radio" name="language" value="no">no
+						</div>
+					</div>	
+					<br>
+					<hr size="4"  width="1000px" align="left" noshade>		
+					<div class="row">
+						<div class="col-sm-6">
+							<label><h5>⑫ 문화교류</h5></label>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="culture" value="yes">yes
+								<input type="radio" name="culture" value="no">no
+						</div>
+					</div>
+					<br>
+					<hr size="4"  width="1000px" align="left" noshade>		
+					<div class="row">
+						<div class="col-sm-6">
+							<label><h5>⑬ 차량의 주유정보</h5></label>
+							<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" name="gas" value="1">휘발유
+								<input type="radio" name="gas" value="2">경유
+								<input type="radio" name="gas" value="3">LPG
+						</div>	
+					</div>
+					<br>							
+					<hr size="4"  width="1000px" align="left" noshade>
+					<div class="row">			
+					<div class="col-sm-12">
+							<label><h5>⑭ 제공 가능한 물품/시설 </h5></label>
+						<div style="margin:auto;">
+								
+								<h5>[객실 내 제공시설]</h5>
+								<input type="checkbox" name="공용화장실" value="1" checked>거실화장실
+								<input type="checkbox" name="객실내화장실" value="1">(개인)객실내화장실
+								<input type="checkbox" name="객실밖화장실" value="1">(개인)객실밖화장실
+								<input type="checkbox" name="internet" value="1" checked>인터넷
+								<input type="checkbox" name="TV" value="1">텔레비전<br/>
+								<input type="checkbox" name="Computer" value="1">컴퓨터
+								<input type="checkbox" name="Air_Conditioning" value="1" checked>에어컨
+								<input type="checkbox" name="Fridge" value="1" checked>냉장고
+								<input type="checkbox" name="Hair_dryer" value="1">헤어드라이기								
+								<input type="checkbox" name="Smoke_alarm" value="1">화재경보기
+								<input type="checkbox" name="Dresser_Drawers" value="1" checked>서랍장
+								<input type="checkbox" name="Closet_Wardrobe" value="1">옷장
+								<input type="checkbox" name="Mirror" value="1" checked>거울<br/>
+								<input type="checkbox" name="Desk_and_Lamp" value="1" checked>책상과램프
+								<input type="checkbox" name="Gym_at_home" value="1">객실내운동기구
+								<input type="checkbox" name="Bedside_Locker_Nightstand" value="1">스탠드
+								<input type="checkbox" name="Radio" value="1">라디오
+								<input type="checkbox" name="telephone" value="1">전화기
+								<input type="checkbox" name="Carpet_Moquette" value="1">카펫
+								<input type="checkbox" name="fax" value="1">팩스<br/>
+								<input type="checkbox" name="laundry" value="1">세탁시설
+								<input type="checkbox" name="kitchen_available" value="1">조리시설이용가능								
+								<input type="checkbox" name="smoking_possible" value="1">객실내흡연가능
+								<input type="checkbox" name="vegetarian" value="1" checked>채식제공여부
+								<input type="checkbox" name="Swimming_Pool" value="1">객실내수영장
+								<br/>
+								<hr size="4"  width="1000px" align="left" noshade>
+								<h5>[객실 밖 제공시설]</h5>
+								<input type="checkbox" name="Barbecue" value="1">바베큐
+								<input type="checkbox" name="Patio" value="1">파티오
+								<input type="checkbox" name="Parking" value="1" checked>주차장							
+								<input type="checkbox" name="Bikes_for_use" value="1">자전거사용여부
+								<input type="checkbox" name="Wheelchair_Accessible" value="1">휠체어이용가능
+								<br/>
+								<hr size="4"  width="1000px" align="left" noshade>
+
+								<h5>[숙박 주변시설]</h5>
+								<input type="checkbox" name="subway_station" value="1">지하철
+								<input type="checkbox" name="Shopping_Centre" value="1">쇼핑센터
+								<input type="checkbox" name="Amusement_Park" value="1">놀이동산
+								<input type="checkbox" name="Health_club" value="1" checked>헬스클럽
+								<input type="checkbox" name="Garden" value="1">가든								
+								<input type="checkbox" name="Hospital" value="1" checked>병원
+								<input type="checkbox" name="Tennis" value="1">테니스장
+								<input type="checkbox" name="Park" value="1" checked>파크
+								<input type="checkbox" name="Gym" value="1">체육관
+								<input type="checkbox" name="Golf" value="1">골프장<br/>
+								<input type="checkbox" name="Swimming" value="1">수영장
+								<input type="checkbox" name="Cinema" value="1" checked>영화관
+								<input type="checkbox" name="Library" value="1" checked>도서관
+								<input type="checkbox" name="Museum" value="1" checked>박물관
+								<input type="checkbox" name="Restaurant" value="1" checked>레스토랑
+								<input type="checkbox" name="Bowling" value="1" checked>볼링장 
+								<input type="checkbox" name="Airport" value="1">공항
+								<input type="checkbox" name="Beach" value="1">강
+								<input type="checkbox" name="Fishing" value="1">낚시터
+								<input type="checkbox" name="Sports_arena" value="1">스포츠센터
+								<br/>							
+								<hr size="4"  width="1000px" align="left" noshade>
+								<h5>[홈스테이 방 형태]</h5>
+								<input type="checkbox" name="single_room" value="1">1인실
+								<input type="checkbox" name="double_room" value="1">2인실
+								<input type="checkbox" name="triple_room" value="1">3인실
+								<input type="checkbox" name="quadruple_room" value="1">4인실
+								<input type="checkbox" name="dorm" value="1">다인실(5인이상)
+								<br/>
+								<hr size="4"  width="1000px" align="left" noshade>
+								<h5>[애완동물 종류]</h5>
+								<input type="checkbox" name="강아지" value="1">강아지	
+								<input type="checkbox" name="고양이" value="1">고양이	
+								<input type="checkbox" name="어류" value="1">어류
+								<input type="checkbox" name="토끼" value="1">토끼
+								<input type="checkbox" name="햄스터" value="1">햄스터
+								<br/>
+								<hr size="4"  width="1000px" align="left" noshade>
+								<h5>[가능 응답률]</h5>
+								<input type="checkbox" name="within_a_hour" value="1">한시간_이내
+								<input type="checkbox" name="within_two_hours" value="1" checked>두시간_이내
+								<input type="checkbox" name="몇_시간_이내" value="1">몇_시간_이내	
+								<input type="checkbox" name="하루_이내" value="1">하루_이내	
+								<input type="checkbox" name="며칠_이내" value="1">며칠_이내	
+								<br/>
+								<hr size="4"  width="1000px" align="left" noshade>
+								<h5>[선호하는 게스트유형]</h5>
+								<input type="checkbox" name="welcome_irrelevant" value="1" checked>선호하는 게스트없음
+								<input type="checkbox" name="welcome_males" value="1">남자게스트 환영
+								<input type="checkbox" name="welcome_females" value="1">여자게스트 환영
+								<input type="checkbox" name="welcome_couples" value="1">커플게스트 환영
+								<input type="checkbox" name="welcome_families" value="1">가족게스트 환영
+								<input type="checkbox" name="welcome_students" value="1">학생게스트 환영
+								<br/>
+								<hr size="4"  width="1000px" align="left" noshade>
+								<h5>[홈스테이 위치]</h5>
+								<input type="checkbox" name="서울특별시강남구" value="1">서울특별시강남구
+								<input type="checkbox" name="서울특별시강동구" value="1">서울특별시강동구
+								<input type="checkbox" name="서울특별시강북구" value="1">서울특별시강북구
+								<input type="checkbox" name="서울특별시강서구" value="1">서울특별시강서구
+								<input type="checkbox" name="서울특별시구로구" value="1">서울특별시구로구
+								<input type="checkbox" name="서울특별시도봉구" value="1">서울특별시도봉구<br/>
+								<input type="checkbox" name="서울특별시노원구" value="1">서울특별시노원구
+								<input type="checkbox" name="서울특별시중랑구" value="1">서울특별시중랑구								
+								<input type="checkbox" name="서울특별시동대문구" value="1">서울특별시동대문구
+								<input type="checkbox" name="서울특별시동작구" value="1">서울특별시동작구
+								<input type="checkbox" name="서울특별시마포구" value="1">서울특별시마포구
+								<input type="checkbox" name="서울특별시서대문구" value="1">서울특별시서대문구<br/>
+								<input type="checkbox" name="서울특별시서초구" value="1">서울특별시서초구
+								<input type="checkbox" name="서울특별시성북구" value="1">서울특별시성북구
+								<input type="checkbox" name="서울특별시송파구" value="1">서울특별시송파구
+								<input type="checkbox" name="서울특별시양천구" value="1">서울특별시양천구
+								<input type="checkbox" name="서울특별시영등포구" value="1">서울특별시영등포구
+								<input type="checkbox" name="서울특별시영등포구" value="1">서울특별시용산구<br/>
+								<input type="checkbox" name="서울특별시용산구" value="1">서울특별시종로구
+								<input type="checkbox" name="서울특별시중구" value="1">서울특별시중구
+								<input type="checkbox" name="경기도고양시" value="1">경기도고양시
+								<input type="checkbox" name="경기도광주시" value="1">경기도광주시
+								<input type="checkbox" name="경기도김포시" value="1">경기도김포시
+								<input type="checkbox" name="경기도부천시" value="1">경기도부천시
+								<input type="checkbox" name="경기도성남시" value="1">경기도성남시<br/>
+								<input type="checkbox" name="경기도수원시" value="1">경기도수원시
+								<input type="checkbox" name="경기도안양시" value="1">경기도안양시
+								<input type="checkbox" name="경기도양평군" value="1">경기도양평군
+								<input type="checkbox" name="경기도오산시" value="1">경기도오산시
+								<input type="checkbox" name="경기도용인시" value="1">경기도용인시
+								<input type="checkbox" name="경기도이천시" value="1">경기도이천시
+								<input type="checkbox" name="경기도파주시" value="1">경기도파주시	
+								<input type="checkbox" name="경기도양주시" value="1">경기도양주시<br/>
+								<input type="checkbox" name="경기도의왕시" value="1">경기도시흥시	
+<!-- 								<input type="checkbox" name="울산광역시남구" value="1">울산광역시남구
+								<input type="checkbox" name="울산광역시중구" value="1">울산광역시중구	
+								<input type="checkbox" name="인천관역시인천" value="1">인천관역시인천	
+								<input type="checkbox" name="인천광역시계양구" value="1">인천광역시계양구
+								<input type="checkbox" name="인천광역시남동구" value="1">인천광역시남동구
+								<input type="checkbox" name="인천광역시부평구" value="1">인천광역시부평구<br/>	
+								<input type="checkbox" name="인천광역시서구" value="1">인천광역시서구	
+								<input type="checkbox" name="인천광역시연수구" value="1">인천광역시연수구
+								<input type="checkbox" name="인천광역시중구" value="1">인천광역시중구																						
+								<input type="checkbox" name="경상도" value="1">경상도
+								<input type="checkbox" name="대구광역시" value="1">대구광역시
+								<input type="checkbox" name="부산광역시" value="1">부산광역시
+								<input type="checkbox" name="인천광역시" value="1">인천광역시
+								<input type="checkbox" name="제주도" value="1">제주도
+								<input type="checkbox" name="충청북도" value="1">충청북도<br/>
+								<input type="checkbox" name="울산광역시" value="1">울산광역시	
+								<input type="checkbox" name="강원도강릉시" value="1">강원도강릉시	
+								<input type="checkbox" name="경상남도창원시" value="1">경상남도창원시
+								<input type="checkbox" name="경상북도경산시" value="1">경상북도경산시
+								<input type="checkbox" name="대구광역시동구" value="1">대구광역시동구
+								<input type="checkbox" name="대구광역시북구" value="1">대구광역시북구
+								<input type="checkbox" name="부산광역시부산진구" value="1">부산광역시부산진구<br/>
+								<input type="checkbox" name="부산광역시사하구" value="1">부산광역시사하구
+								<input type="checkbox" name="부산광역시해운대구" value="1">부산광역시해운대구
+								<input type="checkbox" name="제주도서귀포시" value="1">제주도서귀포시
+								<input type="checkbox" name="제주도제주시" value="1">제주도제주시
+								<input type="checkbox" name="충청북도단양군" value="1">충청북도단양군 -->	
+								
+						</div>				
+						<hr size="4"  width="1000px" align="left" noshade>		
+						<div >
+							<label><h5>⑮ 숙소이미지 등록</h5></label><br>
+							<input type="file" name="file1">
+						</div>	
+						<hr size="4"  width="1000px" align="left" noshade>							
+						</div>
+						
+						<div style="margin:auto;">
+							<input type="button" value="홈스테이등록" onclick="product_write()"  class="btn  btn-outline-warning">
+							<input type="button" value="목록" onclick="location.href='/product_list';"  class="btn  btn-outline-warning">	
+						</div>
+					</div>
+					</div>
+				</form> 
+		</div>
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="The River template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='{% static "styles/bootstrap-4.1.2/bootstrap.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/font-awesome-4.7.0/css/font-awesome.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.theme.default.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/animate.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/animate.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/about.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/about_responsive.css"  %}' rel="stylesheet"type="text/css">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="background_image" style="background-image:url({% static "images/friending.jpg" %})">
+<h2 style="background-color:#a5a5a5">로그인</h2>
+<form method="POST" action="{% url 'login' %}">
+{% csrf_token %}
+<!-- {{form.as_p}} -->
+
+<table align="center">
+	<tr>
+		<td>아이디</td>
+		<td>
+			<input id="{{ form.username.id_for_lable}}" maxlength="15" name="{{ form.username.html_name}}">
+		</td>
+	</tr>
+	<tr>
+		<td>비밀번호</td>
+		<td>
+			<input id="{{ form.password.id_for_lable}}" maxlength="120" name="{{ form.password.html_name}}" type="password">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit" value="로그인">
+		</td>
+	</tr>
+</table>
+</form>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<!-- Footer -->
+		<div class="footer_content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="footer_logo_container text-center">
+							<div class="footer_logo">
+								<a href="#"></a>
+								<div>HOMESTAY</div>
+								<div>since 2019</div>
+							</div>
+						</div>
+					</div>
+				</div> 
+				<div class="row footer_row">
+					
+					<div class="col-lg-3">
+						<div class="footer_title">Our Address</div>
+						<div class="footer_list">
+							<ul>
+								<li>서울특별시 강남구 </li>
+								<li>강남대로98길 17</li>
+								<li>KOREA</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="footer_title">Reservations</div>
+						<div class="footer_list">
+							<ul>
+								<li>Tel: 010 8884 8940</li>
+								<li>Fax; 6783 4567 889</li>
+								<li>friendinghomestay@gmail.com</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="footer_title">Newsletter</div>
+						<div class="newsletter_container">
+							<form action="#" class="newsletter_form" id="newsletter_form">
+								<input type="email" class="newsletter_input" placeholder="Your email address" required="required">
+								<button class="newsletter_button">Subscribe</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="ificates d-flex flex-row align-items-start justify-content-lg-between justify-content-start flex-lg-nowrap flex-wrap">
+							<div class=""><img src='{% static "images/Zummalogo.png"   %}' alt=""></div>
+							<div class=""><img src='{% static "images/Lumoslogo.jpg"   %}' alt=""></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+</body>
+</html>

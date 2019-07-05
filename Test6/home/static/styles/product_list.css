@@ -1,0 +1,170 @@
+/*
+** Style Simple Ecommerce Theme for Bootstrap 4
+** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
+*/
+.bloc_left_price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+.category_block li:hover {
+    background-color: #007bff;
+}
+.category_block li:hover a {
+    color: #ffffff;
+}
+.category_block li a {
+    color: #343a40;
+}
+.add_to_cart_block .price {
+    color: #c01508;
+    text-align: center;
+    font-weight: bold;
+    font-size: 200%;
+    margin-bottom: 0;
+}
+.add_to_cart_block .price_discounted {
+    color: #343a40;
+    text-align: center;
+    text-decoration: line-through;
+    font-size: 140%;
+}
+.product_rassurance {
+    padding: 10px;
+    margin-top: 15px;
+    background: #ffffff;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+.product_rassurance .list-inline {
+    margin-bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+.product_rassurance .list-inline li:hover {
+    color: #343a40;
+}
+.reviews_product .fa-star {
+    color: gold;
+}
+.pagination {
+    margin-top: 20px;
+}
+footer {
+    background: #343a40;
+    padding: 40px;
+}
+footer a {
+    color: #f8f9fa!important
+}
+
+
+.booking
+{
+	background: #ffffff;
+	padding-top: 14px;
+	padding-bottom: 114px;
+}
+.booking_slider_container
+{
+	
+}
+.booking_item
+{
+	height: 569px;
+}
+.booking_price
+{
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	width: 128px;
+	height: 36px;
+	background: #ffffff;
+	text-align: center;
+	line-height: 36px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #393939;
+}
+.booking_link
+{
+	position: absolute;
+	bottom: 18px;
+	left: 15px;
+	width: calc(100% - 30px);
+	height: 65px;
+	background: #ffa37b;
+	text-align: center;
+	cursor: pointer;
+}
+.booking_link a
+{
+	display: block;
+	height: 100%;
+	line-height: 65px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #ffffff;
+}
+.booking_overlay
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(13,9,30,0.67);
+	pointer-events: none;
+	visibility: hidden;
+	opacity: 0;
+}
+.booking_item:hover .booking_overlay
+{
+	visibility: visible;
+	opacity: 1;
+}
+.booking_item_content
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding-left: 42px;
+	padding-right: 20px;
+	background: transparent;
+	padding-bottom: 114px;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transform: translateY(30px);
+	-moz-transform: translateY(30px);
+	-ms-transform: translateY(30px);
+	-o-transform: translateY(30px);
+	transform: translateY(30px);
+	-webkit-transition: all 800ms ease;
+	-moz-transition: all 800ms ease;
+	-ms-transition: all 800ms ease;
+	-o-transition: all 800ms ease;
+	transition: all 800ms ease;
+}
+.booking_item:hover .booking_item_content
+{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transform: none;
+	-moz-transform: none;
+	-ms-transform: none;
+	-o-transform: none;
+	transform: none;
+}
+.booking_item_list ul li:not(:last-of-type)
+{
+	margin-bottom: 3px;
+}
+.booking_item_list ul li
+{
+	font-size: 18px;
+	font-weight: 600;
+	color: #ffffff;
+}

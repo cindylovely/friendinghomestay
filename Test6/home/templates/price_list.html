@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list2.css"  %}' rel="stylesheet" type="text/css">
+
+
+<script>	
+function price_update(){
+	const urlParams = new URLSearchParams(window.location.search);
+	const myParam = urlParams.get('product_id');
+	
+	document.form1.action = "price_update?product_id=" + myParam;
+	document.form1.submit();
+	
+}
+/* $(function(){
+	$("#btnPrice").click(function(){
+		location.href="price_write";
+	});
+	$("#btnAdd").click(function(){
+		location.href="product_write";
+	});		
+}); */
+</script>
+
+<title>price Tips</title>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAll">Homestay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<form id="form1" name="form1" method="post" enctyoe="multipart/form-data">
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Price Tips</h1>
+<!--         <button type="button" id="btnHome" >Home</button>
+        <input type="button" value="Apply" onclick="price_update()"> -->
+		<!-- <button type="button" id="btnAdd" >최종가격등록</button> -->
+     </div>
+</section>
+
+<!-- <form id="form1" name="form1" method="post" enctyoe="multipart/form-data"> -->
+<!-- <table border="1" width="600px;"  align="center">
+	<tr>
+		<td colspan="5" align="right">
+		 	price-Tips:&nbsp;<input name="real_price" value="{{real_price}}" placeholder={{real_price}} >
+		</td>		
+	</tr>
+	<tr>
+		<td> 최소가격 <input class="form-control" placeholder="$0" value=""></td>
+		<td><input type="range" class="custom-range" name=""></td>
+		<td> 최대가격 <input class="form-control" placeholder="$1,0000" type="number" value=""></td>		
+	</tr>	
+</table> -->
+
+
+<div class="container">
+	<aside class="col-sm-5" style="margin:0 auto;">
+	<div class="card card-filter">
+		<!-- <article class="card-group-item"> -->
+	<!-- 		<div class="filter-content collapse show" id="collapse33"> -->
+				<div class="card-body" align="right">
+					<b >price-Tips:</b> &nbsp; <input name="real_price" value="{{real_price}}" placeholder={{real_price}} >
+					<!-- <input type="range" class="custom-range" min="0" max="10000" name=""> -->
+					<div class="form-row">
+					<div class="form-group col-md-6">
+					  <label>Min</label>
+					  <input class="form-control" type="number" name="min_price" value="{{min_price}}" >
+					</div>
+					<div class="form-group text-right col-md-6">
+					  <label>Max</label>
+					  <input class="form-control" type="number" name="max_price" value="{{max_price}}" >
+					</div>
+					</div> 
+					<button class="btn btn-block btn-outline-primary" value="Apply" onclick="price_update()">Apply</button>
+				</div> 
+		<!-- 	</div> -->
+		</article>
+	</div>
+ 	</aside>
+</div>
+
+</form>
+
+</body>
+</html>

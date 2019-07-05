@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>호스트 매칭</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list2.css"  %}' rel="stylesheet" type="text/css">
+
+<script>
+$(function(){
+	$("#btnHome").click(function(){
+		location.href="/";
+	});
+	$("#btnAdd").click(function(){
+		location.href="detail_infowrite";
+	});		
+});
+</script>
+</head>
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/room_listAll">Homestay</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading"> Host recommendation </h1>
+     </div>
+</section>
+
+<body>
+<main class="col-sm-12" style="width:80% ; margin:0 auto;">
+<article class="card card-product" >
+	<div class="card-body">
+	<div class="row">	
+	{% for list in GuestList %}
+		<aside class="col-sm-4" >
+		<br>
+			<div>			
+			{% if list.picture_url != "-" %}
+			{% load static %}
+			{% static "" as baseUrl %}
+			<img src="{{baseUrl}}images/{{list.file2}}" width="260px" height="260px">
+			{% endif %}
+			</div>
+			<div class="mb-3" align="center" > 
+				<var class="price h3 text-warning" > 
+					<span class="currency">
+						<tr>	
+							<td> {{list.username}}</td>
+						</tr>
+					</span>
+				</var> 
+			</div>
+		</aside> 
+		<aside class="col-sm-1 border-left">
+			<div class="action-wrap">
+			</div> 
+		</aside>
+
+		<article class="col-sm-3">
+		<br>				
+			<h5>
+			Your_mathcing_host is:
+				{% for host in d%}
+				<a href="room_listAll?host={{host.host}}"  class="fa fa-heart">
+					 {{host.host}} (matching score: {{host.score}})
+			  	</a>
+			  	<br><br>
+			  	{% endfor %}
+			</h5>
+		</article> 
+		
+	{% endfor %}	 
+	</div> 
+	</div> 
+</article> 	
+</main>    
+<br>   <br>  <br>  <br>  
+    
+</div>
+</body>
+</html>

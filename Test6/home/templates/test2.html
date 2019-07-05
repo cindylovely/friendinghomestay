@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+    uid = request.session.get("userid")
+    productList = Product.objects.filter(username=uid)
+    fp=open("C:\\model_weekday.sav","rb")
+    f2=open("C:\\matrix_CZ.sav","rb")
+    f3=open("C:\\y_pred.sav","rb")
+    f4=open("C:\\y_tar.sav","rb")
+    f5=open("C:\\dsft.sav","rb")
+ 
+    y_pred = pickle.load(f3)
+    y_tar = pickle.load(f4)
+    model = pickle.load(fp)
+    CZ = pickle.load(f2)
+    dsft= pickle.load(f5)
+    
+    
+    
+    modified = [obj for obj in productList.values()]
+    for obj in modified:
+        allinfo = []
+        for k,v in obj:
+            allinfo.append(v)
+        print(allinfo)     
+        aaaa = allinfo[18:70]
+        bbbb =  allinfo[70:]    
+        X_homo = []
+        X_hetero = []
+        for i in aaaa:
+            X_homo.append(int(i))   
+        for j in bbbb:
+            X_hetero.append(int(j)) 
+        X_homo = np.array(X_homo)
+        X_homo = np.dot(X_homo, CZ)
+        X_hetero = np.array(X_hetero)
+        X_test = dsft.make_homogeneous_feature(X_homo, X_hetero, True)
+        priceTips = model.predict([X_test])[0]
+    
+        y_tar1 = np.expm1(y_tar)
+        y_pred1 = np.expm1(y_pred)
+        real_price1 = np.expm1(priceTips)
+        real_price = int(round(real_price1))
+        obj['price_real_price'] = real_price
+        
+        print(real_price)
+    
+        sum_errs = sum((y_tar1 - y_pred1)**2)
+        stdev = math.sqrt(1/(len(y_tar1)-2) * sum_errs)
+        sigma = 0.5 * stdev
+        min_price1, max_price1 = real_price - sigma, real_price + sigma
+        
+        min_price = int(round(min_price1))
+        max_price = int(round(max_price1))
+
+
+        prediction = np.random.rand()
+        obj['price_tips'] = prediction
+        
+        
+        
+        
+    print("DICTIONARY:", modified)
+    return render_to_response("product_list.html", {"productList": modified ,'real_price':real_price, "min_price":min_price, "max_price":max_price })
+    
+    fp.close()
+</body>
+</html>

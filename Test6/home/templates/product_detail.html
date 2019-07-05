@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+<title>Booking</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="The River template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href='{% static "styles/bootstrap-4.1.2/bootstrap.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/font-awesome-4.7.0/css/font-awesome.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.theme.default.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/animate.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/jquery-datepicker/jquery-ui.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/booking1.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/booking_responsive.css"  %}' rel="stylesheet"type="text/css">
+
+</head>
+<body>
+<div>
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="header_content d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a href="#">Homestay</a></div>
+			<div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+				<nav class="main_nav">
+					<ul class="d-flex flex-row align-items-start justify-content-start">
+						<li><a href="http://127.0.0.1:8000/">Home</a></li>
+						<li><a href="/about">Site Information</a></li>
+						<li><a href="/room_listAll">Homestay</a></li>
+						<li><a href="/blog">Event</a></li>
+						<li><a href="/list">Communication</a></li>
+					</ul>
+				</nav>
+
+				{% if data.is_authenticated %}
+<!-- 				  <a href="/mypage"> 마이페이지</a>
+				  <a href="/logout"> 로그아웃</a> -->
+				{% else %}
+<!-- 					아이디:{{data.username}}<br>
+					로그인여부:{{data.is_authenticated}}<br> -->
+				 	<span style="color:red;">{{msg}}</span><br>
+				 	<a href="/mypage"> 마이페이지</a>
+				  	<a href="/logout"> 로그아웃</a>
+					<a href="/product_list">숙소등록</a> 
+				{% endif %}
+				<!-- Hamburger Menu -->
+				<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
+		<div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="menu_content">
+			<nav class="menu_nav text-right">
+				<ul>
+					<li><a href="http://127.0.0.1:8000/">Home</a></li>
+					<li><a href="/about">About us</a></li>
+					<li><a href="/room_listAll">Homestay</a></li>
+					<li><a href="/blog">Event</a></li>
+					<li><a href="/list">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+		</div>
+	</div>
+
+	<div class="home">
+		<div class="background_image" style="background-image:url({% static "images/booking.png" %})"></div>
+	</div>
+	<br><br>
+	
+<!-- 	<table style="text-align: center">
+			<tr>
+				<td>
+				{% load static %}
+				{% static "" as baseUrl %}
+				<img src="{{baseUrl}}images/{{dto.picture_url}}" width="500px" height="300px" align="center">
+				</td>	
+			</tr>
+			<tr>	
+				<td>홈스테이명 :</td>
+				<td>{{dto.product_name}}</td>
+			</tr>
+			<tr>	
+				<td>홈스테이 가격 :</td>
+				<td>{{dto.real_price}}</td>
+			</tr>
+			<tr>	
+				<td>홈스테이 소개 :</td>
+				<td>{{dto.description}}</td>
+			</tr>
+			<tr>
+				<td>홈스테이 시설:</td>
+	 			<td>
+		 				welcome_irrelevant:{{dto.welcome_irrelevant}}  |
+		 				welcome_males:{{dto.welcome_males}}  |
+		 				welcome_couples:{{dto.welcome_couples}}  |
+		 				welcome_families:{{dto.welcome_families}}  |
+		 				internet:{{dto.internet}}  |
+		 				kitchen_available:{{dto.kitchen_available}}  |
+		 				Parking:{{dto.Parking}}  |
+		 				Air_Conditioning:{{dto.Air_Conditioning}}  |
+		 				Computer:{{dto.Computer}}  |
+		 				Smoke_alarm:{{dto.Smoke_alarm}}  |
+		 				Desk_and_Lamp:{{dto.Desk_and_Lamp}}  |
+		 				Dresser_Drawers:{{dto.Dresser_Drawers}}  |
+		 				Closet_Wardrobe:{{dto.Closet_Wardrobe}}  |
+		 				Hair_dryer:{{dto.Hair_dryer}}  |
+		 				Garden:{{dto.Garden}}  |
+		 				Wheelchair_Accessible:{{dto.Wheelchair_Accessible}}  |
+		 				Barbecue:{{dto.Barbecue}}  |
+		 				Bikes_for_use:{{dto.Bikes_for_use}}  |
+		 				Barbecue:{{dto.Barbecue}}  |
+		 				Bedside_Locker_Nightstand:{{dto.Bedside_Locker_Nightstand}}
+		 			</td>
+			</tr>				
+			<tr>
+				<td>언어교류 :</td>
+				<td>{{dto.language}}</td>
+			</tr>	
+			<tr>
+				<td>문화교류:</td>
+				<td>{{dto.culture}}</td>
+			</tr>		
+			<tr>
+			<td>{{dto2.sex}}</td>
+			</tr>
+							
+					<form name="form1" method="post" action="cart_insert">
+						<input type="hidden" name="product_id" value="{{dto.product_id}}">
+				
+						<tr>			
+							<td>문화교류 선택</td>
+							<td>
+							     ▶서울지역 관광지</br>
+								<input type="checkbox" name=travel value="경복궁">경복궁
+								<input type="checkbox" name=travel value="한국전쟁기념관" >한국 전쟁 기념관
+								<input type="checkbox" name=travel value="창덕궁">창덕궁
+								<input type="checkbox" name=travel value="북한산국립공원">북한산 국립공원
+								<input type="checkbox" name=travel value="명동">명동<br>
+								<input type="checkbox" name=travel value="트릭아이뮤지엄서울">트릭아이 뮤지엄 서울
+								<input type="checkbox" name=travel value="국립중앙박물관" >국립중앙박물관
+								<input type="checkbox" name=travel value="엔서울타워" >N서울타워
+								<input type="checkbox" name=travel value="인사동" >인사동
+								<input type="checkbox" name=travel value="북촌한옥마을" >북촌 한옥 마을
+								<input type="checkbox" name=travel value="조계사" >조계사
+								<input type="checkbox" name=travel value="여의도한강공원" >여의도 한강 공원
+								<input type="checkbox" name=travel value="롯데월드타워몰" >롯데월드타워&몰
+								<input type="checkbox" name=travel value="봉은사" >봉은사
+								<input type="checkbox" name=travel value="홍대" >홍대<br>
+								<input type="checkbox" name=travel value="청계천" >청계천
+								<input type="checkbox" name=travel value="동대문디자인플라자" >동대문 디자인 플라자
+								<input type="checkbox" name=travel value="광장시장" >광장시장
+								<input type="checkbox" name=travel value="올림픽공원" >올림픽공원
+								<input type="checkbox" name=travel value="서대문형무소역사관" >서대문 형무소 역사관	
+								<input type="checkbox" name=travel value="이태원" >이태원
+								<input type="checkbox" name=travel value="광화문광장" >광화문광장
+								<input type="checkbox" name=travel value="코엑스" >코엑스
+								<input type="checkbox" name=travel value="이화벽화마을" >이화벽화마을
+								<input type="checkbox" name=travel value="육삼빌딩" >63빌딩<br>
+								<input type="checkbox" name=travel value="뚝섬한강공원" >뚝섬 한강 공원
+								<input type="checkbox" name=travel  value="망원한강공원" >망원 한강 공원	 	
+								<br>  ▶경기지역 관광지</br>
+								<input type="checkbox" name=travel value="용인에버랜드" >용인 에버랜드
+								<input type="checkbox" name=travel value="파주임진각 ">파주 임진각 
+								<input type="checkbox" name=travel value="수원화성" >수원 화성
+								<input type="checkbox" name=travel value="가평아침고요수목원" >가평 아침 고요 수목원
+								<input type="checkbox" name=travel value="남한산성" >남한산성
+								<input type="checkbox" name=travel value="용인한국민속촌" >용인 한국 민속촌
+								<input type="checkbox" name=travel value="이천도예마을" >이천 도예마을<br>
+								<input type="checkbox" name=travel value="과천서울대공원" >과천 서울대공원
+								<input type="checkbox" name=travel value="광명동굴" >광명동굴
+								<input type="checkbox" name=travel value="포천아트밸리" >포천 아트밸리
+								<input type="checkbox" name=travel value="가평쁘띠프랑스">가평 쁘띠프랑스
+								<input type="checkbox" name=travel value="양평두물머리" >양평 두물머리
+								<input type="checkbox" name=travel value="파주헤이리예술마을">파주 헤이리 예술마을
+								<input type="checkbox" name=travel value="여주세종대왕릉">여주 세종대왕릉				
+							</td> 
+						</tr>	
+						<tr>
+							<td>홈스테이 숙박인원수</td>
+							<td>
+								<select name="amount">
+										{% for i in range %}
+										 <option value="{{i}}">{{i}}</option>
+										{% endfor %}
+								</select>명
+							</td>
+						</tr>	
+						<tr>
+							<th> 홈스테이 첫째날</th>
+								<td><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="첫째날" required="required" name="checkin" value="checkin"></td>
+						</tr>
+						<tr>		
+							<th>홈스테이 마지막날</th>
+								<td><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="마지막날" required="required" name="checkout" value="checkout"></td>
+						</tr>	
+						<tr>			
+							<td>	
+								<input type="submit" value="Likey">
+							</td>	
+						</tr>		
+						</form>
+						</td>
+					</table>
+				</td>
+			</tr>
+	</table>
+</div>
+
+ -->
+
+
+<main class="card" style="width:85% ; margin:0 auto;">
+	<div class="row no-gutters">
+		
+<article class="gallery-wrap"> 
+<div class="img-big-wrap">
+ 	 <div>
+ 	  &nbsp; &nbsp;	 &nbsp;&nbsp;	
+ 		<tr align="center">
+			<td>
+			{% load static %}
+			{% static "" as baseUrl %}
+			<img src="{{baseUrl}}images/{{dto.picture_url}}" width="500px" height="500px">
+			</td>	
+		</tr>
+	</div>
+</div> 
+</article>
+	
+		<aside class="col-sm-6">
+		
+		
+<article class="card-body">
+<!-- short-info-wrap -->
+	<h3 class="title mb-3">	
+			<tr>	
+				<td>{{dto.product_name}}</td>
+			</tr>
+		</h3>
+
+<div class="mb-3"> 
+	<var class="price h3 text-warning"> 
+		<span class="currency">
+			<tr>	
+				<td>{{dto.real_price}}원</td>
+			</tr>
+		</span>
+	</var> 
+</div>
+<dl>
+  <dt>홈스테이 소개</dt>
+  <dd><p><td>{{dto.description}}</td></p></dd>
+</dl>
+	
+<dl class="row">
+  <dt class="col-sm-7">호스트 성별</dt>
+  <dd class="col-sm-5">{{dto2.sex}}</dd>
+
+  <dt class="col-sm-7">배우고 싶은 언어 1/2/3순위</dt>
+  <dd class="col-sm-5">{{dto2.drop1}}, {{dto2.drop2}}, {{dto2.drop3}}</dd>
+  <dt class="col-sm-7">선호하는 언어교류 주당 횟수 및 시간</dt>
+  <dd class="col-sm-5">{{dto2.languageexchangecount}}, {{dto2.languageexchangeminute}}</dd>  
+  
+  <dt class="col-sm-7">호스트 출생년도</dt>
+  <dd class="col-sm-5">{{dto2.age}}년</dd>
+  
+  <dt class="col-sm-7">호스트 직업</dt>
+  <dd class="col-sm-5">{{dto2.job}}</dd> 
+    
+  <dt class="col-sm-7">호스트 종교</dt>
+  <dd class="col-sm-5">{{dto2.religion}}</dd> 
+   
+  <dt class="col-sm-7">호스트 취미</dt>
+  <dd class="col-sm-5">{{dto2.hobby}}</dd>
+  
+  <dt class="col-sm-7">호스트 추천관광지</dt>
+  <dd class="col-sm-5">{{dto2.travel}}</dd>          
+</dl>
+<div class="rating-wrap">
+
+</div>
+<hr>
+	<div class="row">
+	 <div class="col-sm-12"> 
+			<dl>
+				  <dt> 홈스테이 제공사항</dt>
+				  <dd>
+				  	<label class="form-check form-check-inline">
+					  <span class="form-check-label">
+					 	
+		 				공용화장실:{{dto.공용화장실}} |
+		 				객실내화장실:{{dto.객실내화장실}} |
+		 				객실밖화장실:{{dto.객실밖화장실}} |
+		 				internet:{{dto.internet}} |
+		 				TV:{{dto.TV}} |
+		 				Computer:{{dto.Computer}} |
+		 				Air_Conditioning:{{dto.Air_Conditioning}} |
+		 				Fridge:{{dto.Fridge}} |
+		 				Hair_dryer:{{dto.Hair_dryer}} |
+		 				Smoke_alarm:{{dto.Smoke_alarm}} |
+		 				Desk_and_Lamp:{{dto.Desk_and_Lamp}} |
+		 				Dresser_Drawers:{{dto.Dresser_Drawers}} |
+		 				Closet_Wardrobe:{{dto.Closet_Wardrobe}} |
+		 				Mirror:{{dto.Mirror}} |
+		 				Gym_at_home:{{dto.Gym_at_home}} |
+		 				Bedside_Locker_Nightstand:{{dto.Bedside_Locker_Nightstand}} |
+		 				Radio:{{dto.Radio}} |
+		 				telephone:{{dto.telephone}} |
+		 				laundry:{{dto.laundry}}	|	
+		 				kitchen_available:{{dto.kitchen_available}}	|
+		 				smoking_possible:{{dto.smoking_possible}} |
+		 				Bikes_for_use:{{dto.Bikes_for_use}}	|
+		 				vegetarian:{{dto.vegetarian}} |
+		 				Swimming_Pool:{{dto.Swimming_Pool}}	|
+		 				Barbecue:{{dto.Barbecue}} |
+		 				Restaurant:{{dto.Restaurant}} |
+		 				
+		 				Parking:{{dto.Parking}}	|
+		 				subway_station:{{dto.subway_station}} |
+		 				Shopping_Centre:{{dto.Shopping_Centre}} |
+		 				Amusement_Park:{{dto.Amusement_Park}} | 
+		 				Health_club:{{dto.Health_club}}|
+		 				
+		 				Wheelchair_Accessible:{{dto.Wheelchair_Accessible}}	|
+		 				Garden:{{dto.Garden}}|
+		 				Hospital:{{dto.Hospital}}|
+		 				Tennis:{{dto.Tennis}}|
+		 				Park:{{dto.Park}}|
+		 				Gym:{{dto.Gym}}	|
+		 				Golf:{{dto.Golf}} |
+		 				Swimming:{{dto.Swimming}} |
+		 				Cinema:{{dto.Cinema}} |
+		 				Library:{{dto.Library}}	|
+		 				Museum:{{dto.Museum}} |
+		 				
+		 				Bowling:{{dto.Bowling}}	|
+		 				
+		 				Airport:{{dto.Airport}}	|
+		 				Beach:{{dto.Beach}}	|
+		 				Fishing:{{dto.Fishing}} |
+		 				Bowling:{{dto.Bowling}}	|
+		 				Sports_arena:{{dto.Sports_arena}} |
+		 				
+		 				
+		 							  
+					  </span>
+					</label>
+				  </dd>
+			</dl>
+		</div>
+	</div> 
+	<hr>
+</article> 
+		</aside>
+	</div>
+</main>
+
+<!-- PRODUCT DETAIL -->
+<article class="card mt-3" style="width:85% ; margin:0 auto;">
+	<div class="card-body" >
+		<h4>홈스테이 예약</h4>
+			<form name="form1" method="post" action="cart_insert?pid={{dto.product_id}}&gas={{dto.gas}}">
+						<input type="hidden" name="product_id" value="{{dto.product_id}}">
+						<tr>
+							<td>1.홈스테이 숙박인원수</td>
+							<td>
+								<select name="amount">
+										{% for i in range %}
+										 <option value="{{i}}">{{i}}</option>
+										{% endfor %}
+								</select>명
+							</td>
+						</tr>
+						<br>
+						<br>
+						<tr>			
+							<td>2.문화교류 선택</td>
+							<br>
+							<td>
+							  ▶
+								<select name="travel" class=selectBasic>
+									<option value="" >서울지역 관광지</option>
+									<option value="경복궁">경복궁</option>
+									<option value="한국전쟁기념관" >한국전쟁기념관</option>
+									<option value="창덕궁" >창덕궁</option>
+									<option value="트릭아이뮤지엄서울" >트릭아이 뮤지엄 서울</option>
+									<option value="엔서울타워" >N서울타워 </option>
+									<option value="인사동" >인사동</option>
+									<option value="조계사" >조계사</option>
+									<option value="롯데월드타워몰" >롯데월드타워&몰</option>
+									<option value="봉은사" >봉은사</option>
+									<option value="홍대" >홍대</option>
+									<option value="청계천" >청계천</option>
+									<option value="명동" >명동</option>
+									<option value="동대문디자인플라자" >동대문디자인플라자</option>	
+									<option value="광장시장" >광장시장</option>
+									<option value="올림픽공원" >올림픽공원</option>
+									<option value="이태원" >이태원</option>
+									<option value="광화문광장" >광화문광장</option>
+									<option value="코엑스" >코엑스</option>
+									<option value="이화벽화마을" >이화벽화마을</option>
+									<option value="육삼빌딩" >63빌딩</option>
+									<option value="뚝섬한강공원" >뚝섬한강공원</option>
+									<option value="망원한강공원" >망원한강공원</option>						
+								</select>							
+							   <br><br>
+							   
+<!-- 								<input type="checkbox" name=travel value="경복궁">경복궁
+								<input type="checkbox" name=travel value="한국전쟁기념관" >한국전쟁 기념관
+								<input type="checkbox" name=travel value="창덕궁">창덕궁
+								<input type="checkbox" name=travel value="북한산국립공원">북한산 국립공원
+								<input type="checkbox" name=travel value="명동">명동
+								<input type="checkbox" name=travel value="트릭아이뮤지엄서울">트릭아이 뮤지엄 서울
+								<input type="checkbox" name=travel value="국립중앙박물관" >국립중앙박물관
+								<input type="checkbox" name=travel value="엔서울타워" >N서울타워
+								<input type="checkbox" name=travel value="인사동" >인사동 <br>
+								<input type="checkbox" name=travel value="북촌한옥마을" >북촌 한옥 마을
+								<input type="checkbox" name=travel value="조계사" >조계사
+								<input type="checkbox" name=travel value="여의도한강공원" >여의도 한강 공원
+								<input type="checkbox" name=travel value="롯데월드타워몰" >롯데월드타워&몰
+								<input type="checkbox" name=travel value="봉은사" >봉은사
+								<input type="checkbox" name=travel value="홍대" >홍대
+								<input type="checkbox" name=travel value="청계천" >청계천
+								<input type="checkbox" name=travel value="동대문디자인플라자" >동대문 디자인 플라자
+								<input type="checkbox" name=travel value="광장시장" >광장시장<br>
+								<input type="checkbox" name=travel value="올림픽공원" >올림픽공원
+								<input type="checkbox" name=travel value="서대문형무소역사관" >서대문 형무소 역사관	
+								<input type="checkbox" name=travel value="이태원" >이태원
+								<input type="checkbox" name=travel value="광화문광장" >광화문광장
+								<input type="checkbox" name=travel value="코엑스" >코엑스
+								<input type="checkbox" name=travel value="이화벽화마을" >이화벽화마을
+								<input type="checkbox" name=travel value="육삼빌딩" >63빌딩
+								<input type="checkbox" name=travel value="뚝섬한강공원" >뚝섬 한강 공원
+								<input type="checkbox" name=travel  value="망원한강공원" >망원 한강 공원	 --> 	
+								▶ <select name="travel" class=selectBasic>
+									<option value="" >경기지역 관광지</option>
+									<option value="용인에버랜드">용인에버랜드</option>
+									<option value="파주임진각" >파주임진각</option>
+									<option value="수원화성" >수원화성</option>
+									
+									<option value="가평아침고요수목원" >가평아침고요수목원</option>
+									<option value="남한산성" >남한산성</option>
+									<option value="용인한국민속촌" >용인한국민속촌</option>
+									<option value="이천도예마을" >이천도예마을</option>
+									<option value="과천서울대공원" >과천서울대공원</option>
+									<option value="광명동굴" >광명동굴</option>
+									<option value="포천아트밸리" >포천아트밸리</option>
+									<option value="가평쁘띠프랑스" >가평쁘띠프랑스</option>
+									<option value="양평두물머리" >양평두물머리</option>
+									<option value="파주헤이리예술마을" >파주헤이리예술마을</option>
+									<option value="여주세종대왕릉" >여주세종대왕릉</option>
+								</select>
+								
+								
+								
+		<!-- 						<input type="checkbox" name=travel value="용인에버랜드" >용인 에버랜드
+								<input type="checkbox" name=travel value="파주임진각 ">파주 임진각 
+								<input type="checkbox" name=travel value="수원화성" >수원 화성
+								<input type="checkbox" name=travel value="가평아침고요수목원" >가평 아침 고요 수목원
+								<input type="checkbox" name=travel value="남한산성" >남한산성
+								<input type="checkbox" name=travel value="용인한국민속촌" >용인 한국 민속촌
+								<input type="checkbox" name=travel value="이천도예마을" >이천 도예마을<br>
+								<input type="checkbox" name=travel value="과천서울대공원" >과천 서울대공원
+								<input type="checkbox" name=travel value="광명동굴" >광명동굴
+								<input type="checkbox" name=travel value="포천아트밸리" >포천 아트밸리
+								<input type="checkbox" name=travel value="가평쁘띠프랑스">가평 쁘띠프랑스
+								<input type="checkbox" name=travel value="양평두물머리" >양평 두물머리
+								<input type="checkbox" name=travel value="파주헤이리예술마을">파주 헤이리 예술마을
+								<input type="checkbox" name=travel value="여주세종대왕릉">여주 세종대왕릉		 -->		
+							</td> 
+						</tr>	
+						<br>
+						<br>
+						<tr>
+							<th>3.홈스테이 머무는기간 </th>
+								<td><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="첫째날" required="required" name="checkin" value="checkin"></td>
+						</tr>
+						<tr>		
+							<th></th>
+								<td><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="마지막날" required="required" name="checkout" value="checkout"></td>
+						</tr>	
+						<br>
+						<tr>			
+							<td>	
+								<input type="submit" value="Likey" class="btn  btn-outline-warning">
+							</td>	
+						</tr>		
+		</form>
+	</div> 
+</article>
+
+<br><br><br><br><br>
+
+
+<script src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script src='{% static "styles/bootstrap-4.1.2/popper.js" %}'></script>
+<script src='{% static "styles/bootstrap-4.1.2/bootstrap.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TweenMax.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TimelineMax.min.js" %}'></script>
+<script src='{% static "plugins/scrollmagic/ScrollMagic.min.js" %}'></script>
+<script src='{% static "plugins/greensock/animation.gsap.min.js" %}'></script>
+<script src='{% static "plugins/greensock/ScrollToPlugin.min.js" %}'></script>
+<script src='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.js" %}'></script>
+<script src='{% static "plugins/easing/easing.js" %}'></script>
+<script src='{% static "plugins/progressbar/progressbar.min.js" %}'></script>
+<script src='{% static "plugins/parallax-js-master/parallax.min.js" %}'></script>
+<script src='{% static "plugins/jquery-datepicker/jquery-ui.js" %}'></script>
+<script src='{% static "js/booking.js" %}'></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	String.prototype.replaceAll = function(search, replacement) {
+	    var target = this;
+	    return target.replace(new RegExp(search, 'g'), replacement);
+	};
+	
+	text = $('.form-check-label').text().replaceAll('1', '✔').replaceAll('0', '-').replaceAll('_', ' ')
+	$('.form-check-label').text(text)
+	
+	
+})
+</script>
+
+</body>
+</html>

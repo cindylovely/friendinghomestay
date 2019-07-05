@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="UTF-8">
+<title>홈스테이 숙소편집</title>
+<script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href='{% static "styles/product_list.css"  %}' rel="stylesheet" type="text/css">
+
+<script>
+function product_delete(){
+	if(confirm("삭제하시겠습니까?")){
+		document.form1.action = "product_delete";
+		document.form1.submit();
+	}
+}
+function product_update(){
+	document.form1.action = "product_update";
+	document.form1.submit();
+}
+</script>
+</head>
+
+<body>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Homestay</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/booking">Room</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/blog">Event <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Communication</a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary btn-number">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading"> 숙소 정보 수정 / 삭제</h1>
+     </div>
+</section>
+<form id="form1" name="form1" method="post" enctyoe="multipart/form-data">
+<table>
+	<tr>
+		<td>숙소명</td>
+		<td><input name="product_name" value="{{dto.product_name}}"></td>
+	</tr>
+	<tr>
+		<td>지역</td>
+		<td><input name="location" value="{{dto.location}}"></td>
+	</tr>
+	<tr>
+		<td>주소</td>
+		<td><input name="locate" value="{{dto.locate}}"></td>
+	</tr>
+	<tr>
+		<td>집유형</td>
+		<td><input name="house" value="{{dto.house}}"></td>
+	</tr>
+	<tr>
+		<td>제공방의수</td>
+		<td><input name="room" value="{{dto.room}}"></td>
+	</tr>
+	<tr>
+		<td>침대유형</td>
+		<td><input name="bed" value="{{dto.bed}}"></td>
+	</tr>
+	<tr>
+		<td>욕실유형</td>
+		<td><input name="bathroom" value="{{dto.bathroom}}"></td>
+	</tr>
+	<tr>
+		<td>애완동물</td>
+		<td><input name="pet" value="{{dto.pet}}"></td>
+	</tr>	
+	<tr>
+		<td>가족수</td>
+		<td><input name="family" value="{{dto.family}}"></td>
+	</tr>		
+	<tr>
+		<td>언어교류</td>
+		<td><input name="language" value="{{dto.language}}"></td>
+	</tr>	
+	<tr>
+		<td>문화교류</td>
+		<td><input name="culture" value="{{dto.culture}}"></td>
+	</tr>													
+	<tr>
+		<td>숙소설명</td>
+		<td><textarea rows="5" cols="60" name="description" id="description">{{dto.description}}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>숙소이미지</td>
+		<td>
+			{% load static %}
+		{% static "" as baseUrl %}
+		<img src="{{baseUrl}}images/{{dto.pricture_url}}" width="300px" height="300px"><br>
+		<input type="file" name="file1">
+		</td>
+	</tr>
+	<tr>	
+	
+	<td colspan="2" align="center">
+		<input type="hidden" name="product_id"
+		value="{{dto.product_id}}">
+		
+		<input type="button" value="수정" onclick="product_update()">
+		
+		<input type="button" value="삭제" onclick="product_delete()">
+		
+		<input type="button" value="목록" onclick="location.href='product_list'">
+	</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

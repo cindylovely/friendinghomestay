@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+<title>About us</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="The River template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href='{% static "styles/bootstrap-4.1.2/bootstrap.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/font-awesome-4.7.0/css/font-awesome.min.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/owl.theme.default.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/animate.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "plugins/OwlCarousel2-2.3.4/animate.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/about.css"  %}' rel="stylesheet"type="text/css">
+<link href='{% static "styles/about_responsive.css"  %}' rel="stylesheet"type="text/css">
+
+
+</head>
+<body>
+
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="header_content d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a href="#">Homestay</a></div>
+			<div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+				<nav class="main_nav">
+					<ul class="d-flex flex-row align-items-start justify-content-start">
+						<li><a href="http://127.0.0.1:8000/">Home</a></li>
+						<li><a href="/about">Site Information</a></li>
+						<li><a href="/room_listAll">Homestay</a></li>
+						<li><a href="/blog">Event</a></li>
+						<li><a href="/list">Communication</a></li>
+					</ul>
+				</nav>
+
+				{% if data.is_authenticated %}
+<!-- 				  <a href="/mypage"> 마이페이지</a>
+				  <a href="/logout"> 로그아웃</a> -->
+				{% else %}
+					{{data.username}}<br>
+					{{data.is_authenticated}}<br>
+				 	<span style="color:red;">{{msg}}</span><br>
+				 	<a href="/mypage"> 마이페이지</a>
+				  	<a href="/logout"> 로그아웃</a>
+					<a href="/product_list">숙소등록</a> 
+				{% endif %}
+				<!-- Hamburger Menu -->
+				<div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu trans_400 d-flex flex-column align-items-end justify-content-start">
+		<div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+		<div class="menu_content">
+			<nav class="menu_nav text-right">
+				<ul>
+					<li><a href="http://127.0.0.1:8000/">Home</a></li>
+					<li><a href="/about">About us</a></li>
+					<li><a href="/room_listAll">Homestay</a></li>
+					<li><a href="/blog">Event</a></li>
+					<li><a href="/list">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="background_image" style="background-image:url(images/about.jpg)"></div>
+		<div class="home_container">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content text-center">
+							<div class="home_title">Site Information</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- About -->
+
+	<div class="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="about_title"><h2>서비스 소개</h2></div>
+				</div>
+			</div>
+			<div class="row about_row">
+				
+				<!-- About Content -->
+				<div class="col-lg-6">
+					<div class="about_content">
+						<div class="about_text">
+							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit.</p>
+						</div>
+						<div class="about_sig"><img src="images/sig.png" alt=""></div>
+					</div>
+				</div>
+
+				<!-- About Images -->
+				<div class="col-lg-6">
+					<div class="about_images d-flex flex-row align-items-start justify-content-between flex-wrap">
+						<img src="images/about_1.png" alt="">
+						<img src="images/about_2.png" alt="">
+						<img src="images/about_3.png" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Split Section Right -->
+
+	<div class="split_section_right container_custom">
+		<div class="container">
+			<div class="row row-xl-eq-height">
+				
+				<div class="col-xl-6 order-xl-1 order-2">
+					<div class="split_section_image">
+						<div class="background_image" style="background-image:url(images/milestones.jpg)"></div>
+					</div>
+				</div>
+
+				<div class="col-xl-6 order-xl-2 order-1">
+					<div class="split_section_right_content">
+						<div class="split_section_title"><h1> 예약방법</h1></div>
+						<div class="split_section_text">
+							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
+						</div>
+
+						<!-- Milestones -->
+						<div class="milestones_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+								
+							<!-- Milestone -->
+							<div class="milestone d-flex flex-row align-items-start justify-content-start">
+								<div class="milestone_content">
+									<div class="milestone_counter" data-end-value="45">0</div>
+									<div class="milestone_title">Rooms available</div>
+								</div>
+							</div>
+
+							<!-- Milestone -->
+							<div class="milestone d-flex flex-row align-items-start justify-content-start">
+								<div class="milestone_content">
+									<div class="milestone_counter" data-end-value="21" data-sign-after="K">0</div>
+									<div class="milestone_title">Tourists this year</div>
+								</div>
+							</div>
+
+							<!-- Milestone -->
+							<div class="milestone d-flex flex-row align-items-start justify-content-start">
+								<div class="milestone_content">
+									<div class="milestone_counter" data-end-value="2">0</div>
+									<div class="milestone_title">Swimming pools</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Split Section Left -->
+
+	<div class="split_section_left container_custom">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-6">
+					<div class="split_section_left_content">
+						<div class="split_section_title"><h1>프렌딩 가격 책정 기준</h1></div>
+						<div class="split_section_text">
+							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
+						</div>
+
+						<!-- Loaders -->
+						<div class="loaders_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+							
+							<!-- Loader -->
+							<div class="loader_container text-center">
+								<div class="loader text-center" data-perc="0.9">
+									<div class="loader_content">
+										<div class="loader_title">Good Services</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Loader -->
+							<div class="loader_container text-center">
+								<div class="loader text-center" data-perc="0.8">
+									<div class="loader_content">
+										<div class="loader_title">Tourists</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Loader -->
+							<div class="loader_container text-center">
+								<div class="loader text-center" data-perc="1.0">
+									<div class="loader_content">
+										<div class="loader_title">Satisfaction</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+				<!-- Loaders Image -->
+				<div class="col-xl-6">
+					<div class="split_section_image split_section_left_image">
+						<div class="background_image" style="background-image:url(images/loaders.jpg)"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Split Section Right -->
+
+	<div class="split_section_right container_custom">
+		<div class="container">
+			<div class="row row-xl-eq-height">
+				
+				<div class="col-xl-6 order-xl-1 order-2">
+					<div class="split_section_image">
+						<div class="background_image" style="background-image:url(images/milestones.jpg)"></div>
+					</div>
+				</div>
+
+				<div class="col-xl-6 order-xl-2 order-1">
+					<div class="split_section_right_content">
+						<div class="split_section_title"><h1>다이렉트 매칭</h1></div>
+						<div class="split_section_text">
+							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.</p>
+						</div>
+
+						<!-- Milestones -->
+						<div class="milestones_container d-flex flex-row align-items-start justify-content-start flex-wrap">
+								
+							<!-- Milestone -->
+							<div class="milestone d-flex flex-row align-items-start justify-content-start">
+								<div class="milestone_content">
+									<div class="milestone_counter" data-end-value="45">0</div>
+									<div class="milestone_title">Rooms available</div>
+								</div>
+							</div>
+
+							<!-- Milestone -->
+							<div class="milestone d-flex flex-row align-items-start justify-content-start">
+								<div class="milestone_content">
+									<div class="milestone_counter" data-end-value="21" data-sign-after="K">0</div>
+									<div class="milestone_title">Tourists this year</div>
+								</div>
+							</div>
+
+							<!-- Milestone -->
+							<div class="milestone d-flex flex-row align-items-start justify-content-start">
+								<div class="milestone_content">
+									<div class="milestone_counter" data-end-value="2">0</div>
+									<div class="milestone_title">Swimming pools</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="footer_content">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="footer_logo_container text-center">
+							<div class="footer_logo">
+								<a href="#"></a>
+								<div><h3>The HOMESTAY</h3></div>
+								<div>since 2019</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row footer_row">
+		</div>
+		<div class="copyright">
+</div>
+	</footer>
+</div>
+
+
+
+<script src='{% static "js/jquery-3.3.1.min.js" %}'></script>
+<script src='{% static "styles/bootstrap-4.1.2/popper.js" %}'></script>
+<script src='{% static "styles/bootstrap-4.1.2/bootstrap.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TweenMax.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TimelineMax.min.js" %}'></script>
+<script src='{% static "plugins/greensock/TimelineMax.min.js" %}'></script>
+<script src='{% static "plugins/scrollmagic/ScrollMagic.min.js" %}'></script>
+
+<script src='{% static "plugins/greensock/animation.gsap.min.js" %}'></script>
+<script src='{% static "plugins/greensock/ScrollToPlugin.min.js" %}'></script>
+<script src='{% static "plugins/OwlCarousel2-2.3.4/owl.carousel.js" %}'></script>
+<script src='{% static "plugins/progressbar/progressbar.min.js" %}'></script>
+<script src='{% static "plugins/parallax-js-master/parallax.min.js" %}'></script>
+<script src='{% static "plugins/jquery-datepicker/jquery-ui.js" %}'></script>
+<script src='{% static "js/about.js" %}'></script>
+
+
+
+</body>
+</html>
